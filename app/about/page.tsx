@@ -41,6 +41,12 @@ export default function AboutPage() {
               and Brothers in Hue still inform how interfaces are structured
               and presented.
             </p>
+            <p className="about-links">
+              <a href={site.linkedin} target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+              <a href={`mailto:${site.email}`}>{site.email}</a>
+            </p>
             <div className="mt-8 space-y-4">
               {education.map((item) => {
                 const org = orgByName(item.school);

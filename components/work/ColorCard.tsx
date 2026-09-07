@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Project } from "@/lib/data";
+import { CategoryMark } from "@/components/icons/CategoryMark";
 
 export function ColorCard({ project }: { project: Project }) {
   return (
@@ -8,6 +9,7 @@ export function ColorCard({ project }: { project: Project }) {
       className="color-card"
       data-tone={project.tone}
     >
+      <CategoryMark category={project.category} />
       <div>
         <div className="project-meta">
           <h3 className="project-title">{project.title}</h3>
