@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+  <rect width="1200" height="900" fill="#EBE9DF"/>
+  <circle cx="600" cy="380" r="16" fill="#171412"/>
+  <rect x="360" y="372" width="224" height="16" fill="#171412"/>
+  <rect x="616" y="372" width="224" height="16" fill="#171412"/>
+  <rect x="592" y="260" width="16" height="224" fill="#171412"/>
+  <ellipse cx="360" cy="380" rx="90" ry="28" fill="#FF7722"/>
+  <ellipse cx="840" cy="380" rx="90" ry="28" fill="#FF7722"/>
+  <ellipse cx="600" cy="260" rx="28" ry="90" fill="#3D2FA9"/>
+  <ellipse cx="600" cy="500" rx="28" ry="90" fill="#3D2FA9"/>
+  <text x="80" y="760" fill="#171412" font-family="ui-sans-serif, system-ui" font-size="42" font-weight="700">EcoDrone</text>
+  <text x="80" y="810" fill="#8E827C" font-family="ui-sans-serif, system-ui" font-size="22">CO‚ · temperature · Pixhawk 6C</text>
+</svg>

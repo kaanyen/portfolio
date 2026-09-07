@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+  <rect width="1200" height="900" fill="#171412"/>
+  <path d="M80 120h200v80H80z" fill="#2A241F"/>
+  <path d="M80 220h200v80H80z" fill="#3D2FA9"/>
+  <path d="M80 320h200v80H80z" fill="#2A241F"/>
+  <path d="M80 420h200v80H80z" fill="#FF7722"/>
+  <path d="M80 520h200v80H80z" fill="#2A241F"/>
+  <path d="M920 120h200v80H920z" fill="#2A241F"/>
+  <path d="M920 220h200v80H920z" fill="#FF7722"/>
+  <path d="M920 320h200v80H920z" fill="#2A241F"/>
+  <path d="M920 420h200v80H920z" fill="#3D2FA9"/>
+  <path d="M920 520h200v80H920z" fill="#2A241F"/>
+  <path d="M300 200h160v80H300zM740 200h160v80H740zM380 320h440v80H380zM300 440h160v80H300zM740 440h160v80H740z" fill="#FBF9EF" opacity="0.12"/>
+  <path d="M460 200h80v40h80v40H540v80h-80V280H380v-40h80V200z" fill="#FF7722"/>
+  <text x="80" y="720" fill="#FBF9EF" font-family="ui-sans-serif, system-ui" font-size="42" font-weight="700">U-Net · skip ablation</text>
+  <text x="80" y="780" fill="#8E827C" font-family="ui-sans-serif, system-ui" font-size="24">Dice 0.971 spleen · 15.9% tumor without skips</text>
+</svg>

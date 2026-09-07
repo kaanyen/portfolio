@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+  <rect width="1200" height="900" fill="#EBE9DF"/>
+  <rect x="80" y="80" width="1040" height="740" rx="28" fill="#FBF9EF"/>
+  <circle cx="200" cy="220" r="48" fill="#FF3C34"/>
+  <rect x="280" y="190" width="320" height="18" rx="9" fill="#171412"/>
+  <rect x="280" y="226" width="220" height="12" rx="6" fill="#8E827C"/>
+  <rect x="120" y="320" width="960" height="8" rx="4" fill="#171412"/>
+  <rect x="120" y="360" width="820" height="8" rx="4" fill="#8E827C"/>
+  <rect x="120" y="400" width="700" height="8" rx="4" fill="#8E827C"/>
+  <rect x="120" y="500" width="160" height="40" rx="20" fill="#3D2FA9"/>
+  <rect x="300" y="500" width="200" height="40" rx="20" fill="#FF7722"/>
+  <rect x="520" y="500" width="180" height="40" rx="20" fill="#171412"/>
+  <text x="148" y="528" fill="#FBF9EF" font-family="ui-sans-serif, system-ui" font-size="16">symptom</text>
+  <text x="340" y="528" fill="#FBF9EF" font-family="ui-sans-serif, system-ui" font-size="16">diagnosis</text>
+  <text x="552" y="528" fill="#FBF9EF" font-family="ui-sans-serif, system-ui" font-size="16">medication</text>
+  <text x="120" y="740" fill="#171412" font-family="ui-sans-serif, system-ui" font-size="36" font-weight="700">MediVoice</text>
+  <text x="120" y="780" fill="#8E827C" font-family="ui-sans-serif, system-ui" font-size="20">consultation transcription + medical NER</text>
+</svg>

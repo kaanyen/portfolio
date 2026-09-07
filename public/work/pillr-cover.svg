@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+  <rect width="1200" height="900" fill="#F2F0E7"/>
+  <circle cx="600" cy="380" r="220" fill="#171412"/>
+  <circle cx="600" cy="380" r="140" fill="#FBF9EF"/>
+  <circle cx="600" cy="380" r="60" fill="#FF7722"/>
+  <text x="120" y="760" fill="#171412" font-family="ui-sans-serif, system-ui" font-size="42" font-weight="700">Pillr</text>
+  <text x="120" y="810" fill="#8E827C" font-family="ui-sans-serif, system-ui" font-size="22">multi-tenant · EN / FR · 124 tests</text>
+</svg>

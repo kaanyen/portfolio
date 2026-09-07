@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+  <rect width="1200" height="900" fill="#171412"/>
+  <rect x="48" y="48" width="1104" height="804" rx="24" fill="#1F1B18"/>
+  <rect x="72" y="80" width="220" height="740" rx="16" fill="#2A241F"/>
+  <rect x="316" y="80" width="804" height="96" rx="16" fill="#2A241F"/>
+  <rect x="316" y="200" width="388" height="280" rx="16" fill="#FBF9EF"/>
+  <rect x="732" y="200" width="388" height="280" rx="16" fill="#2A241F"/>
+  <rect x="316" y="504" width="388" height="316" rx="16" fill="#2A241F"/>
+  <rect x="732" y="504" width="388" height="316" rx="16" fill="#FF7722"/>
+  <circle cx="120" cy="128" r="18" fill="#FF7722"/>
+  <rect x="96" y="180" width="172" height="10" rx="5" fill="#8E827C"/>
+  <rect x="96" y="208" width="140" height="10" rx="5" fill="#8E827C"/>
+  <rect x="96" y="280" width="172" height="48" rx="10" fill="#3D2FA9"/>
+  <rect x="96" y="344" width="172" height="48" rx="10" fill="#2A241F"/>
+  <rect x="96" y="408" width="172" height="48" rx="10" fill="#2A241F"/>
+  <rect x="348" y="232" width="180" height="14" rx="7" fill="#171412"/>
+  <rect x="348" y="264" width="320" height="10" rx="5" fill="#8E827C"/>
+  <rect x="348" y="288" width="260" height="10" rx="5" fill="#8E827C"/>
+  <text x="80" y="860" fill="#FBF9EF" font-family="Georgia, serif" font-size="28">Boafo · six-panel workspace</text>
+</svg>
