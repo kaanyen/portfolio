@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { KingMark } from "@/components/icons/KingMark";
@@ -13,7 +12,6 @@ function prefersReducedMotion() {
 }
 
 export function PageLoader() {
-  const pathname = usePathname();
   const overlay = useRef<HTMLDivElement>(null);
   const piece = useRef<HTMLSpanElement>(null);
 
@@ -27,10 +25,6 @@ export function PageLoader() {
         window.dispatchEvent(new Event("page-ready"));
         overlay.current?.classList.add("is-gone");
       };
-
-      overlay.current?.classList.remove("is-gone");
-
-      gsap.killTweensOf([root, mark]);
 
       if (prefersReducedMotion()) {
         gsap.set(root, { autoAlpha: 0 });
@@ -68,7 +62,9 @@ export function PageLoader() {
           "+=0.06",
         );
     },
-    { dependencies: [pathname] },
+    // Runs once per full page load. The loader lives in the root layout,
+    // so client-side navigations keep it gone.
+    [],
   );
 
   return (

@@ -19,10 +19,24 @@ export function Header() {
     <>
       <header className="header">
         <div className="header-inner">
-          <Link href="/" className="brand" aria-label={`${site.name}, home`}>
-            <KingMark className="brand-mark" />
-            <span className="brand-word">{site.name}</span>
-          </Link>
+          <div className="header-bar header-bar-top">
+            <Link href="/" className="brand" aria-label={`${site.name}, home`}>
+              <KingMark className="brand-mark" />
+              <span className="brand-word">{site.name}</span>
+            </Link>
+
+            <div className="header-actions">
+              <EmailCta />
+              <a
+                href={site.linkedin}
+                className="header-in"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
 
           <nav className="nav-rail" aria-label="Primary">
             {nav.map((item) => {
@@ -36,34 +50,25 @@ export function Header() {
             })}
           </nav>
 
-          <button
-            type="button"
-            className="menu-toggle"
-            aria-expanded={open}
-            aria-controls="site-menu"
-            onClick={() => setOpen(true)}
-          >
-            Menu
-            <span className="menu-dots" aria-hidden>
-              <span />
-              <span />
-              <span />
-            </span>
-          </button>
-
-          <div className="header-actions">
-            <EmailCta />
-            <a
-              href={site.linkedin}
-              className="header-in"
-              target="_blank"
-              rel="noreferrer"
+          <div className="header-bar header-bar-bottom">
+            <button
+              type="button"
+              className="menu-toggle"
+              aria-expanded={open}
+              aria-controls="site-menu"
+              onClick={() => setOpen(true)}
             >
-              LinkedIn
-            </a>
+              <span className="menu-dots" aria-hidden>
+                <span />
+                <span />
+                <span />
+              </span>
+              Menu
+            </button>
+
+            <Clock />
           </div>
 
-          <Clock />
           <ScrollProgress />
         </div>
       </header>

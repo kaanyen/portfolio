@@ -9,7 +9,9 @@ Personal site in the register of [Brand Appart](https://www.brandappart.com/): N
 - GSAP + ScrollTrigger
 - Lenis smooth scroll
 
-Brand Appart’s live site is Next.js + GSAP + Sanity, with Youth and PP Neue Montreal. Those two faces are licensed, so this build uses Syne ExtraBold and Geist as the nearest freely licensed pair, plus IBM Plex Mono (same as theirs).
+Brand Appart’s live site is Next.js + GSAP + Sanity, with Youth and PP Neue Montreal. Those faces are licensed, so this build uses Geist (display and body) and Geist Mono, both loaded as variable fonts through `next/font`.
+
+Work stills in `public/work/` are served through `next/image`. When you add one, record its pixel size in `stillSizes` in `lib/data.ts`.
 
 ## Run
 

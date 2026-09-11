@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { orgs } from "@/lib/data";
@@ -59,12 +60,13 @@ export function Hero() {
       <div className="hero-center">
         <p className="hero-greet" data-hero-fade>
           Hey, I&apos;m
-          <img
+          <Image
             className="hero-face"
             src={site.portrait}
             alt=""
             width={96}
             height={52}
+            loading="eager"
           />
           {site.name.split(" ")[0]}
         </p>
@@ -81,6 +83,8 @@ export function Hero() {
                 src={org.logo}
                 width={org.logoWidth}
                 height={org.logoHeight}
+                href={org.url}
+                hidden={index >= marqueeOrgs.length}
                 className="marquee-item"
               />
             ))}
