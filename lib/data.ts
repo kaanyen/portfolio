@@ -28,6 +28,40 @@ export type CardTone =
   | "wine"
   | "forest";
 
+// Mirrors the `[data-tone]` rules in globals.css, for places CSS can't reach
+// (generated Open Graph images).
+export const toneColors: Record<CardTone, { bg: string; ink: string }> = {
+  purple: { bg: "#6b1d32", ink: "#f4ede3" },
+  orange: { bg: "#ff7722", ink: "#171412" },
+  red: { bg: "#ff3c34", ink: "#fbf9ef" },
+  yellow: { bg: "#ffc765", ink: "#171412" },
+  ink: { bg: "#171412", ink: "#fbf9ef" },
+  teal: { bg: "#1f6b63", ink: "#fbf9ef" },
+  olive: { bg: "#5c6b3a", ink: "#fbf9ef" },
+  clay: { bg: "#c45c3e", ink: "#fbf9ef" },
+  wine: { bg: "#7a2e4a", ink: "#fbf9ef" },
+  forest: { bg: "#2d4a3e", ink: "#fbf9ef" },
+};
+
+// Intrinsic pixel sizes of the stills in public/work, so next/image can
+// reserve space and build a srcset. Add an entry when adding a still.
+export const stillSizes: Record<string, { width: number; height: number }> = {
+  "/work/crescendo-01-my-work.png": { width: 1440, height: 1453 },
+  "/work/crescendo-02-board.png": { width: 1440, height: 2428 },
+  "/work/crescendo-07-timeline.png": { width: 1440, height: 900 },
+  "/work/crescendo-15-charts.png": { width: 1440, height: 1926 },
+  "/work/crescendo-20-task-modal.png": { width: 1440, height: 2428 },
+  "/work/crescendo-22-agent-pane.png": { width: 1440, height: 2428 },
+  "/work/gmoney-01-login.png": { width: 2880, height: 2436 },
+  "/work/gmoney-02-queue.png": { width: 2880, height: 3168 },
+  "/work/gmoney-03-case-reasons.png": { width: 2880, height: 4418 },
+  "/work/gmoney-04-case-evidence.png": { width: 2880, height: 4690 },
+  "/work/gmoney-05-case-graph.png": { width: 2880, height: 4332 },
+  "/work/gmoney-06-pilot.png": { width: 2880, height: 4606 },
+  "/work/gmoney-07-audit.png": { width: 2880, height: 3364 },
+  "/work/medivoice-live.png": { width: 1280, height: 720 },
+};
+
 export type ShipItem = {
   id: string;
   index: string;
@@ -55,11 +89,13 @@ export type Org = {
   logoHeight?: string;
   mark?: string;
   markWidth?: string;
+  url?: string;
 };
 
 export const orgs: Org[] = [
   {
     name: "SyneroLabs",
+    url: "https://www.synerolabs.io",
     logo: "/orgs/synerolabs.png",
     logoWidth: "8rem",
     mark: "/orgs/synerolabs-mark.svg",
@@ -67,54 +103,68 @@ export const orgs: Org[] = [
   },
   {
     name: "Ashesi",
+    url: "https://www.ashesi.edu.gh",
     aliases: ["Ashesi University"],
     logo: "/orgs/ashesi.png",
     logoWidth: "8.5rem",
     mark: "/orgs/ashesi-mark.png",
     markWidth: "1.45rem",
   },
-  { name: "CVPR", logo: "/orgs/cvpr.svg", logoWidth: "6.9rem" },
+  { name: "CVPR", url: "https://cvpr.thecvf.com", logo: "/orgs/cvpr.svg", logoWidth: "6.9rem" },
   {
     name: "iSpace Ghana",
+    url: "https://www.ispacefoundation.com",
     aliases: ["iSpace", "iSpace Foundation"],
     logo: "/orgs/ispace.png",
     logoWidth: "7rem",
   },
-  { name: "Wode Maya", logo: "/orgs/wodemaya.png", logoWidth: "8.2rem" },
+  { name: "Wode Maya", url: "https://www.youtube.com/@WodeMaya", logo: "/orgs/wodemaya.png", logoWidth: "8.2rem" },
   {
     name: "Afrique Créative",
+    url: "https://afriquecreative.fr/en/",
     aliases: ["Afrique Creative"],
     logo: "/orgs/afrique.png",
     logoWidth: "9.9rem",
   },
   {
     name: "AFD",
+    url: "https://www.afd.fr/en",
     aliases: ["Agence Française de Développement"],
     logo: "/orgs/afd.png",
     logoWidth: "3.4rem",
   },
   {
     name: "Crossroads International",
+    url: "https://cintl.org",
     aliases: ["Crossroad Internationals", "Crossroads"],
     logo: "/orgs/crossroads.png",
     logoWidth: "8.1rem",
   },
-  { name: "RISA", logo: "/orgs/risa.png", logoWidth: "4.4rem" },
+  { name: "RISA", url: "https://www.risa-fund.org", logo: "/orgs/risa.png", logoWidth: "4.4rem" },
   {
     name: "GIZ",
+    url: "https://www.giz.de/en",
     aliases: ["Giz", "Deutsche Gesellschaft für Internationale Zusammenarbeit"],
     logo: "/orgs/giz.svg",
     logoWidth: "6.5rem",
   },
   {
     name: "German Cooperation",
+    url: "https://www.bmz.de/en",
     aliases: ["German Coorepation", "Deutsche Zusammenarbeit"],
     logo: "/orgs/german-cooperation.png",
     logoWidth: "4.2rem",
     logoHeight: "2.45rem",
   },
-  { name: "Ostec", aliases: ["ostec"], logo: "/orgs/ostec.png", logoWidth: "7.4rem" },
-  { name: "Auorae", aliases: ["Auoráe"], logo: "/orgs/auorae.png", logoWidth: "5.9rem" },
+  { name: "Ostec", url: "https://ostecit.com", aliases: ["ostec"], logo: "/orgs/ostec.png", logoWidth: "7.4rem" },
+  { name: "Auorae", url: "https://www.auorae.com", aliases: ["Auoráe"], logo: "/orgs/auorae.png", logoWidth: "5.9rem" },
+  {
+    name: "Danoff Engineering",
+    aliases: ["Danoff Engineering Company Ltd."],
+    url: "https://danoffengineering.com",
+    logo: "/orgs/danoff.png",
+    logoWidth: "4.4rem",
+  },
   { name: "G-Money" },
   { name: "Crescendo" },
   { name: "Brothers in Hue" },

@@ -58,6 +58,7 @@ export default function AboutPage() {
                           name={org.name}
                           src={org.mark}
                           width={org.markWidth}
+                          href={org.url}
                           className="role-logo"
                         />
                       ) : null}

@@ -18,6 +18,8 @@
   --bg-darker: #ebe9df;
   --radius: 0.75em;
   --pad: 2em;
+  --bar-h: 3.6rem;
+  --bar-h-bottom: 2.6rem;
 }
 
 @theme inline {
@@ -50,6 +52,8 @@ body {
 
 body {
   min-height: 100%;
+  /* Keep the end of every page (the footer) clear of the fixed bottom bar. */
+  padding-bottom: var(--bar-h-bottom);
 }
 
 a {
@@ -130,21 +134,40 @@ img {
 
 .header-inner {
   height: 100%;
-  padding: 1.25rem 1.4rem;
+}
+
+/* Solid beige strips pinned to the top and bottom edges. The rest of the
+   header layer stays click-through so the page underneath works. */
+.header-bar {
+  pointer-events: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--bar-h);
+  padding: 0 1.4rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: flex-start;
+  gap: 1rem;
+  background: var(--bg);
+}
+
+.header-bar-top {
+  top: 0;
+  border-bottom: 1px solid #e6e0d2;
+}
+
+.header-bar-bottom {
+  bottom: 0;
+  height: var(--bar-h-bottom);
+  border-top: 1px solid #e6e0d2;
 }
 
 .brand {
-  pointer-events: auto;
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
   color: var(--burgundy);
-  background: var(--bg);
-  padding: 0.35rem 0.7rem 0.35rem 0.4rem;
-  border-radius: 999px;
 }
 
 .brand-mark,
@@ -242,14 +265,9 @@ img {
 }
 
 .menu-toggle {
-  pointer-events: auto;
-  position: absolute;
-  left: 1.4rem;
-  bottom: 1.3rem;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.35rem;
+  align-items: center;
+  gap: 0.55rem;
   font-family: var(--font-display), Arial, sans-serif;
   font-size: 0.78rem;
   letter-spacing: 0.08em;
@@ -269,12 +287,9 @@ img {
 }
 
 .header-actions {
-  pointer-events: auto;
-  align-self: flex-start;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 1rem;
 }
 
 .header-cta {
@@ -369,10 +384,6 @@ img {
 }
 
 .clock {
-  pointer-events: none;
-  position: absolute;
-  right: 2.1rem;
-  bottom: 1.35rem;
   color: var(--grey);
   font-size: 0.78rem;
 }
@@ -435,7 +446,7 @@ img {
 
 .hero {
   min-height: 100svh;
-  padding: 7.5rem 1.25rem 2.4rem;
+  padding: 7.5rem 1.25rem calc(var(--bar-h-bottom) + 1.6rem);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -551,6 +562,24 @@ img {
   -webkit-mask-size: contain;
   mask-size: contain;
   flex: 0 0 auto;
+}
+
+.org-link {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  border-radius: 0.3rem;
+}
+
+.org-link:hover .org-mark,
+.org-link:focus-visible .org-mark {
+  opacity: 1;
+  color: var(--burgundy-deep);
+}
+
+.org-link:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 4px;
 }
 
 .marquee-item.org-mark {

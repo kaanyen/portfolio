@@ -43,7 +43,12 @@ export default async function WorkPage({ params }: Props) {
 
         <div className="work-media mt-10">
           {hero ? (
-            <WorkImage src={hero} alt={`${project.title} hero`} />
+            <WorkImage
+              src={hero}
+              alt={`${project.title} hero`}
+              sizes="(min-width: 1280px) 1240px, 100vw"
+              eager
+            />
           ) : (
             <WorkCover project={project} />
           )}
@@ -84,7 +89,12 @@ export default async function WorkPage({ params }: Props) {
         {gallery.length ? (
           <div className="gallery mt-12">
             {gallery.map((src) => (
-              <WorkImage key={src} src={src} alt={`${project.title} still`} />
+              <WorkImage
+                key={src}
+                src={src}
+                alt={`${project.title} still`}
+                sizes="(min-width: 800px) 50vw, 100vw"
+              />
             ))}
           </div>
         ) : null}
