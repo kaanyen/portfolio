@@ -1,11 +1,12 @@
 import { ImageResponse } from "next/og";
+import { geistFonts } from "@/lib/og-fonts";
 import { site } from "@/lib/site";
 
 export const alt = `${site.name} — ${site.title}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function Image() {
+export default async function Image() {
   return new ImageResponse(
     (
       <div
@@ -16,6 +17,7 @@ export default function Image() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
+          fontFamily: "Geist",
           background: "#fbf9ef",
           color: "#3a1520",
         }}
@@ -39,6 +41,6 @@ export default function Image() {
         </div>
       </div>
     ),
-    size,
+    { ...size, fonts: await geistFonts() },
   );
 }

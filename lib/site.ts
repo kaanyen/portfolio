@@ -13,4 +13,5 @@ export const site = {
   cvprPaper:
     "https://generative-vision.github.io/workshop-CVPR-26/papers/21.pdf",
   portrait: "/brand/portrait.jpg",
+  cv: "/Kweku-Abeiku-Attah-Anyen-CV.pdf",
 };
