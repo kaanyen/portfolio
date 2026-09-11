@@ -41,11 +41,17 @@ export default async function WorkPage({ params }: Props) {
           <p className="mt-3 text-sm text-grey">{project.privateNote}</p>
         ) : null}
 
+        {project.metric ? (
+          <div className="case-metric">
+            <span className="case-metric-value">{project.metric.value}</span>
+            <span className="case-metric-label">{project.metric.label}</span>
+          </div>
+        ) : null}
+
         <div className="work-media mt-10">
           {hero ? (
             <WorkImage
               src={hero}
-              alt={`${project.title} hero`}
               sizes="(min-width: 1280px) 1240px, 100vw"
               eager
             />
@@ -55,13 +61,29 @@ export default async function WorkPage({ params }: Props) {
         </div>
 
         <div className="mt-12 grid gap-10 md:grid-cols-[1.2fr_0.8fr]">
-          <div>
-            <p className="max-w-[52ch] text-lg leading-relaxed">{project.description}</p>
-            <ul className="mt-6 max-w-[52ch] list-disc space-y-2 pl-5">
-              {project.highlights.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+          <div className="max-w-[52ch]">
+            <section className="case-section">
+              <h2 className="case-label">Problem</h2>
+              <p className="text-lg leading-relaxed">{project.problem}</p>
+            </section>
+            {project.role ? (
+              <section className="case-section">
+                <h2 className="case-label">My role</h2>
+                <p className="text-lg leading-relaxed">{project.role}</p>
+              </section>
+            ) : null}
+            <section className="case-section">
+              <h2 className="case-label">What I built</h2>
+              <ul className="list-disc space-y-2 pl-5">
+                {project.highlights.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+            <section className="case-section">
+              <h2 className="case-label">Outcome</h2>
+              <p className="text-lg leading-relaxed">{project.outcome}</p>
+            </section>
           </div>
           <aside>
             <p className="text-youth mb-3 uppercase">Stack</p>
@@ -92,8 +114,8 @@ export default async function WorkPage({ params }: Props) {
               <WorkImage
                 key={src}
                 src={src}
-                alt={`${project.title} still`}
                 sizes="(min-width: 800px) 50vw, 100vw"
+                captioned
               />
             ))}
           </div>

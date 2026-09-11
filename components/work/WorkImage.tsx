@@ -1,25 +1,36 @@
 import Image from "next/image";
-import { stillSizes } from "@/lib/data";
+import { stills } from "@/lib/data";
 
 type WorkImageProps = {
   src: string;
-  alt: string;
   sizes: string;
   className?: string;
   eager?: boolean;
+  // Show the still's caption under it. Off for the hero image, whose context
+  // is the page heading.
+  captioned?: boolean;
 };
 
-export function WorkImage({ src, alt, sizes, className, eager }: WorkImageProps) {
-  const size = stillSizes[src] ?? { width: 1440, height: 900 };
-  return (
+export function WorkImage({ src, sizes, className, eager, captioned }: WorkImageProps) {
+  const still = stills[src] ?? { width: 1440, height: 900, caption: "" };
+  const image = (
     <Image
       src={src}
-      alt={alt}
-      width={size.width}
-      height={size.height}
+      alt={still.caption}
+      width={still.width}
+      height={still.height}
       sizes={sizes}
       loading={eager ? "eager" : "lazy"}
       className={`work-still ${className ?? ""}`}
     />
+  );
+
+  if (!captioned || !still.caption) return image;
+
+  return (
+    <figure className="work-figure">
+      {image}
+      <figcaption>{still.caption}</figcaption>
+    </figure>
   );
 }

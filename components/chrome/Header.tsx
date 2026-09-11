@@ -28,6 +28,14 @@ export function Header() {
             <div className="header-actions">
               <EmailCta />
               <a
+                href={site.cv}
+                className="header-in header-cv"
+                target="_blank"
+                rel="noreferrer"
+              >
+                CV
+              </a>
+              <a
                 href={site.linkedin}
                 className="header-in"
                 target="_blank"

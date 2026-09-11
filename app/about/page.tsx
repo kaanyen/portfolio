@@ -45,6 +45,12 @@ export default function AboutPage() {
               <a href={site.linkedin} target="_blank" rel="noreferrer">
                 LinkedIn
               </a>
+              <a href={site.github} target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+              <a href={site.cv} target="_blank" rel="noreferrer">
+                Download CV (PDF)
+              </a>
               <a href={`mailto:${site.email}`}>{site.email}</a>
             </p>
             <div className="mt-8 space-y-4">

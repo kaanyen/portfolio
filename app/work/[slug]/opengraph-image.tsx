@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { geistFonts } from "@/lib/og-fonts";
 import { getProject, projects, toneColors } from "@/lib/data";
 import { site } from "@/lib/site";
 
@@ -29,6 +30,7 @@ export default async function Image({
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 72,
+          fontFamily: "Geist",
           background: tone.bg,
           color: tone.ink,
         }}
@@ -56,6 +58,6 @@ export default async function Image({
         </div>
       </div>
     ),
-    size,
+    { ...size, fonts: await geistFonts() },
   );
 }

@@ -335,6 +335,14 @@ img {
   padding: 0.1rem 0.2rem;
 }
 
+/* No room for the CV link next to the CTA at phone width; it stays in the
+   menu, footer and about page there. */
+@media (max-width: 639px) {
+  .header-cv {
+    display: none;
+  }
+}
+
 .header-in:hover,
 .header-in:focus-visible {
   color: var(--burgundy-deep);
@@ -1099,6 +1107,57 @@ img {
   }
 }
 
+.case-metric {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.2rem;
+  margin-top: 2rem;
+  padding: 1.1rem 0;
+  border-block: 1px solid #e6e0d2;
+}
+
+.case-metric-value {
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: clamp(2.6rem, 7vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  color: var(--burgundy);
+}
+
+.case-metric-label {
+  max-width: 30ch;
+  color: var(--grey);
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.case-section + .case-section {
+  margin-top: 2.2rem;
+}
+
+.case-label {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+}
+
+.work-figure {
+  margin: 0;
+}
+
+.work-figure figcaption {
+  margin-top: 0.55rem;
+  color: var(--grey);
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
 .gallery img {
   width: 100%;
   height: auto;
@@ -1146,6 +1205,32 @@ img {
   font-family: var(--font-display), Arial, sans-serif;
   text-transform: uppercase;
   font-size: 0.82rem;
+}
+
+.contact-form button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.form-status {
+  margin: 0;
+  color: var(--burgundy);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.form-status a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+/* Honeypot field: off-screen for people, still in the form for bots. */
+.form-trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
 }
 
 .see-more {
