@@ -33,6 +33,11 @@ export default function ContactPage() {
                 linkedin.com/in/kwekuanyen
               </a>
             </li>
+            <li>
+              <a href={site.cv} target="_blank" rel="noreferrer">
+                CV (PDF)
+              </a>
+            </li>
           </ul>
         </div>
         <ContactForm />

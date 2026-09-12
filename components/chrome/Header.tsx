@@ -10,6 +10,7 @@ import { ScrollProgress } from "@/components/chrome/ScrollProgress";
 import { icons } from "@/components/chrome/NavIcons";
 import { MenuOverlay } from "@/components/chrome/MenuOverlay";
 import { NavLink } from "@/components/chrome/NavLink";
+import { EmailCta } from "@/components/chrome/EmailCta";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -18,10 +19,32 @@ export function Header() {
     <>
       <header className="header">
         <div className="header-inner">
-          <Link href="/" className="brand" aria-label={`${site.name}, home`}>
-            <KingMark className="brand-mark" />
-            <span className="brand-word">{site.name}</span>
-          </Link>
+          <div className="header-bar header-bar-top">
+            <Link href="/" className="brand" aria-label={`${site.name}, home`}>
+              <KingMark className="brand-mark" />
+              <span className="brand-word">{site.name}</span>
+            </Link>
+
+            <div className="header-actions">
+              <EmailCta />
+              <a
+                href={site.cv}
+                className="header-in header-cv"
+                target="_blank"
+                rel="noreferrer"
+              >
+                CV
+              </a>
+              <a
+                href={site.linkedin}
+                className="header-in"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
 
           <nav className="nav-rail" aria-label="Primary">
             {nav.map((item) => {
@@ -35,26 +58,25 @@ export function Header() {
             })}
           </nav>
 
-          <button
-            type="button"
-            className="menu-toggle"
-            aria-expanded={open}
-            aria-controls="site-menu"
-            onClick={() => setOpen(true)}
-          >
-            Menu
-            <span className="menu-dots" aria-hidden>
-              <span />
-              <span />
-              <span />
-            </span>
-          </button>
+          <div className="header-bar header-bar-bottom">
+            <button
+              type="button"
+              className="menu-toggle"
+              aria-expanded={open}
+              aria-controls="site-menu"
+              onClick={() => setOpen(true)}
+            >
+              <span className="menu-dots" aria-hidden>
+                <span />
+                <span />
+                <span />
+              </span>
+              Menu
+            </button>
 
-          <Link href="/contact" className="header-cta">
-            email me now
-          </Link>
+            <Clock />
+          </div>
 
-          <Clock />
           <ScrollProgress />
         </div>
       </header>

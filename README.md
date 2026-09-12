@@ -9,7 +9,15 @@ Personal site in the register of [Brand Appart](https://www.brandappart.com/): N
 - GSAP + ScrollTrigger
 - Lenis smooth scroll
 
-Brand Appart’s live site is Next.js + GSAP + Sanity, with Youth and PP Neue Montreal. Those two faces are licensed, so this build uses Syne ExtraBold and Geist as the nearest freely licensed pair, plus IBM Plex Mono (same as theirs).
+Brand Appart’s live site is Next.js + GSAP + Sanity, with Youth and PP Neue Montreal. Those faces are licensed, so this build uses Geist (display and body) and Geist Mono, both loaded as variable fonts through `next/font`.
+
+Work stills in `public/work/` are served through `next/image`. When you add one, add its pixel size and caption to `stills` in `lib/data.ts`. The caption is used as alt text and shown under the image.
+
+Open Graph images use the Geist TTFs in `assets/fonts/` (`next/og` can't read woff2).
+
+## Contact form
+
+The form on `/contact` sends through [Resend](https://resend.com) when `RESEND_API_KEY` is set (see `.env.example`). Without it, the form hands the visitor a pre-filled email in their mail app instead of failing silently.
 
 ## Run
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { Header } from "@/components/chrome/Header";
 import { SmoothScroll } from "@/components/chrome/SmoothScroll";
 import { PageLoader } from "@/components/chrome/PageLoader";
@@ -7,18 +8,16 @@ import { Footer } from "@/components/footer/Footer";
 import { site } from "@/lib/site";
 import "./globals.css";
 
+// Both families are variable fonts: omitting `weight` ships one file per
+// family that covers every weight (the CSS uses 400–800, including 650).
 const geist = Geist({
   variable: "--font-geist",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -54,6 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );

@@ -67,6 +67,11 @@ export function Footer() {
               </a>
             </li>
             <li>
+              <a href={site.cv} target="_blank" rel="noreferrer">
+                CV (PDF)
+              </a>
+            </li>
+            <li>
               <a href={site.phoneHref}>{site.phone}</a>
             </li>
           </ul>

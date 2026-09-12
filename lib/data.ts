@@ -4,8 +4,14 @@ export type Project = {
   year: string;
   category: string;
   summary: string;
-  description: string;
+  // Case study structure: problem → role → what I built → outcome.
+  problem: string;
+  // Omitted where the CV doesn't state the role.
+  role?: string;
   highlights: string[];
+  outcome: string;
+  // Headline number shown at the top of the case study.
+  metric?: { value: string; label: string };
   stack: string[];
   image: string;
   images?: string[];
@@ -27,6 +33,44 @@ export type CardTone =
   | "clay"
   | "wine"
   | "forest";
+
+// Mirrors the `[data-tone]` rules in globals.css, for places CSS can't reach
+// (generated Open Graph images).
+export const toneColors: Record<CardTone, { bg: string; ink: string }> = {
+  purple: { bg: "#6b1d32", ink: "#f4ede3" },
+  orange: { bg: "#ff7722", ink: "#171412" },
+  red: { bg: "#ff3c34", ink: "#fbf9ef" },
+  yellow: { bg: "#ffc765", ink: "#171412" },
+  ink: { bg: "#171412", ink: "#fbf9ef" },
+  teal: { bg: "#1f6b63", ink: "#fbf9ef" },
+  olive: { bg: "#5c6b3a", ink: "#fbf9ef" },
+  clay: { bg: "#c45c3e", ink: "#fbf9ef" },
+  wine: { bg: "#7a2e4a", ink: "#fbf9ef" },
+  forest: { bg: "#2d4a3e", ink: "#fbf9ef" },
+};
+
+// Every still in public/work: intrinsic pixel size (so next/image can reserve
+// space and build a srcset) and a caption, used as alt text and shown under
+// the image. Add an entry when adding a still.
+export const stills: Record<
+  string,
+  { width: number; height: number; caption: string }
+> = {
+  "/work/crescendo-01-my-work.png": { width: 1440, height: 1453, caption: "My Work: each person's tasks across projects" },
+  "/work/crescendo-02-board.png": { width: 1440, height: 2428, caption: "Kanban board with sprint health and blocked tasks" },
+  "/work/crescendo-07-timeline.png": { width: 1440, height: 900, caption: "Gantt timeline with dependency chains" },
+  "/work/crescendo-15-charts.png": { width: 1440, height: 1926, caption: "Workload and progress charts" },
+  "/work/crescendo-20-task-modal.png": { width: 1440, height: 2428, caption: "Task detail: assignment, skills and history" },
+  "/work/crescendo-22-agent-pane.png": { width: 1440, height: 2428, caption: "Agent pane: proposed changes waiting for confirmation" },
+  "/work/gmoney-01-login.png": { width: 2880, height: 2436, caption: "Investigator sign-in" },
+  "/work/gmoney-02-queue.png": { width: 2880, height: 3168, caption: "Rank-first alert queue with SLA, typology and assignment" },
+  "/work/gmoney-03-case-reasons.png": { width: 2880, height: 4418, caption: "Case view: why the alert ranked where it did" },
+  "/work/gmoney-04-case-evidence.png": { width: 2880, height: 4690, caption: "Case view: supporting transaction evidence" },
+  "/work/gmoney-05-case-graph.png": { width: 2880, height: 4332, caption: "Case view: neighbourhood graph of linked wallets" },
+  "/work/gmoney-06-pilot.png": { width: 2880, height: 4606, caption: "Shadow-pilot dashboard: explanation coverage and triage time" },
+  "/work/gmoney-07-audit.png": { width: 2880, height: 3364, caption: "Audit trail of scores, assignments and decisions" },
+  "/work/medivoice-live.png": { width: 1280, height: 720, caption: "MediVoice, live consultation view" },
+};
 
 export type ShipItem = {
   id: string;
@@ -55,11 +99,13 @@ export type Org = {
   logoHeight?: string;
   mark?: string;
   markWidth?: string;
+  url?: string;
 };
 
 export const orgs: Org[] = [
   {
     name: "SyneroLabs",
+    url: "https://www.synerolabs.io",
     logo: "/orgs/synerolabs.png",
     logoWidth: "8rem",
     mark: "/orgs/synerolabs-mark.svg",
@@ -67,54 +113,68 @@ export const orgs: Org[] = [
   },
   {
     name: "Ashesi",
+    url: "https://www.ashesi.edu.gh",
     aliases: ["Ashesi University"],
     logo: "/orgs/ashesi.png",
     logoWidth: "8.5rem",
     mark: "/orgs/ashesi-mark.png",
     markWidth: "1.45rem",
   },
-  { name: "CVPR", logo: "/orgs/cvpr.svg", logoWidth: "6.9rem" },
+  { name: "CVPR", url: "https://cvpr.thecvf.com", logo: "/orgs/cvpr.svg", logoWidth: "6.9rem" },
   {
     name: "iSpace Ghana",
+    url: "https://www.ispacefoundation.com",
     aliases: ["iSpace", "iSpace Foundation"],
     logo: "/orgs/ispace.png",
     logoWidth: "7rem",
   },
-  { name: "Wode Maya", logo: "/orgs/wodemaya.png", logoWidth: "8.2rem" },
+  { name: "Wode Maya", url: "https://www.youtube.com/@WodeMaya", logo: "/orgs/wodemaya.png", logoWidth: "8.2rem" },
   {
     name: "Afrique Créative",
+    url: "https://afriquecreative.fr/en/",
     aliases: ["Afrique Creative"],
     logo: "/orgs/afrique.png",
     logoWidth: "9.9rem",
   },
   {
     name: "AFD",
+    url: "https://www.afd.fr/en",
     aliases: ["Agence Française de Développement"],
     logo: "/orgs/afd.png",
     logoWidth: "3.4rem",
   },
   {
     name: "Crossroads International",
+    url: "https://cintl.org",
     aliases: ["Crossroad Internationals", "Crossroads"],
     logo: "/orgs/crossroads.png",
     logoWidth: "8.1rem",
   },
-  { name: "RISA", logo: "/orgs/risa.png", logoWidth: "4.4rem" },
+  { name: "RISA", url: "https://www.risa-fund.org", logo: "/orgs/risa.png", logoWidth: "4.4rem" },
   {
     name: "GIZ",
+    url: "https://www.giz.de/en",
     aliases: ["Giz", "Deutsche Gesellschaft für Internationale Zusammenarbeit"],
     logo: "/orgs/giz.svg",
     logoWidth: "6.5rem",
   },
   {
     name: "German Cooperation",
+    url: "https://www.bmz.de/en",
     aliases: ["German Coorepation", "Deutsche Zusammenarbeit"],
     logo: "/orgs/german-cooperation.png",
     logoWidth: "4.2rem",
     logoHeight: "2.45rem",
   },
-  { name: "Ostec", aliases: ["ostec"], logo: "/orgs/ostec.png", logoWidth: "7.4rem" },
-  { name: "Auorae", aliases: ["Auoráe"], logo: "/orgs/auorae.png", logoWidth: "5.9rem" },
+  { name: "Ostec", url: "https://ostecit.com", aliases: ["ostec"], logo: "/orgs/ostec.png", logoWidth: "7.4rem" },
+  { name: "Auorae", url: "https://www.auorae.com", aliases: ["Auoráe"], logo: "/orgs/auorae.png", logoWidth: "5.9rem" },
+  {
+    name: "Danoff Engineering",
+    aliases: ["Danoff Engineering Company Ltd."],
+    url: "https://danoffengineering.com",
+    logo: "/orgs/danoff.png",
+    logoWidth: "4.4rem",
+  },
   { name: "G-Money" },
   { name: "Crescendo" },
   { name: "Brothers in Hue" },
@@ -151,8 +211,13 @@ export const projects: Project[] = [
     category: "Agent platform",
     summary:
       "Multi-tenant agent runtime and insurance workspace for SyneroLabs: encryption, fail-closed guardrails, and a config-driven product shell.",
-    description:
-      "At SyneroLabs I work across Boafo Runtime and Boafo App. The runtime is a Python / FastAPI / LangGraph engine: tenant-scoped secrets, at-rest Fernet encryption, and post-generation guardrails wired into the live loop so hallucination, scope, and unconfirmed-action failures halt or escalate a turn. The app is a Next.js 16 / React 19 insurance case workspace — case list, six-panel workspace, docked chat, inbox, approval and reversal — with industry verticals as config so Insurance and OMC share one component set. The case domain moved off fixtures onto PostgreSQL, Prisma, NestJS, and tRPC, with a platform-staff grant that does not weaken Membership-scoped access.",
+    metric: { value: "~75", label: "tests on the guardrail routing chain" },
+    problem:
+      "SyneroLabs runs AI agents inside other companies' operations. One runtime serves many tenants, so a secret, a tool config or a bad model answer must never cross from one customer to another, or reach an operator as if it were fact.",
+    role:
+      "Software engineering intern at SyneroLabs since June 2026. I work across Boafo Runtime, Boafo App and Boafo Commerce, and led UI/UX direction for the config-driven Project Workspace.",
+    outcome:
+      "Cross-tenant secret resolution is rejected, failed guardrail checks halt or escalate a turn, and Insurance and OMC run on one shared component set.",
     highlights: [
       "At-rest Fernet encryption and a tenant-scoped secret store that rejects cross-tenant resolution",
       "Guardrail verdicts halt or escalate a turn instead of reaching the user — ~75 tests on the routing chain",
@@ -183,8 +248,11 @@ export const projects: Project[] = [
     category: "Fintech",
     summary:
       "Advisory investigator workspace for a MoMo fraud pilot. Ranked alerts, explainable reasons, human-only enforcement.",
-    description:
-      "G-Money Fraud Operations is an investigator workspace for a fraud-investigation decision-support pilot. The engine ranks mobile-money alerts and explains why they ranked. Every enforcement decision stays with a human — the prototype cannot freeze wallets, block transactions, suspend agents, or file reports. The cohort is eight de-identified Ghana MoMo alerts across structuring, mule fan-out, and P2P layering. A four-eyes path, audit trail, and shadow-pilot dashboard measure explanation coverage and triage time.",
+    metric: { value: "0", label: "enforcement actions the engine can take on its own" },
+    problem:
+      "Fraud investigators on a mobile-money pilot need to know which alerts to open first and why, without handing freeze or block decisions to a model.",
+    outcome:
+      "A working investigator workspace over eight de-identified Ghana MoMo alerts, with a shadow-pilot dashboard that measures explanation coverage and triage time.",
     highlights: [
       "Rank-first queue with SLA, typology, and assignment state on every card",
       "Case views for reasons, evidence, and neighbourhood graph before a disposition",
@@ -213,8 +281,13 @@ export const projects: Project[] = [
     category: "AI product",
     summary:
       "AI project management in which every model call receives the full board state, not an isolated card.",
-    description:
-      "Built for the Opus 4.7 Hackathon. Crescendo’s Board-State Awareness Engine injects team workloads, skill profiles, blocked tasks, sprint health, and dependency chains into every AI call. Five read tools retrieve detail the snapshot cannot carry. Fifteen write tools may only propose a change; nothing is written until a person confirms it. Assigning work to a member at burnout risk returns HTTP 409 until Overdrive is acknowledged and recorded.",
+    metric: { value: "20", label: "agent tools: 5 read, 15 that can only propose a change" },
+    problem:
+      "AI assistants in project tools answer about one card at a time. They don't see who is overloaded, what is blocked, or which dependency is about to slip.",
+    role:
+      "Built for the Opus 4.7 Hackathon in April 2026: the full-stack app and the Board-State Awareness Engine behind it.",
+    outcome:
+      "Every model call sees the whole board, nothing is written until a person confirms it, and assigning work to someone at burnout risk is refused until that risk is acknowledged.",
     highlights: [
       "Board-State Awareness Engine grounds every response in complete project context",
       "Propose-then-confirm write path enforced in code, not in a prompt",
@@ -248,8 +321,13 @@ export const projects: Project[] = [
     category: "Research",
     summary:
       "CVPR 2026 workshop paper: do safety-aligned vision-language models degrade differently under common image corruptions?",
-    description:
-      "First controlled base-vs-aligned evaluation of vision-language models under the ImageNet-C corruption suite, across four matched model pairs and three alignment paradigms (MPO, instruction tuning, SFT+RLHF). We identified and corrected a verbosity-scoring mismatch that biases standard VQA exact-match metrics against aligned models, and showed that alignment paradigm is a stronger predictor of robustness change than model scale — with a severity-dependent reversal under defocus blur. MPO alignment reduced corruption errors by 17% (Relative mCE: 0.830).",
+    metric: { value: "0.830", label: "relative mCE with MPO alignment: 17% fewer corruption errors" },
+    problem:
+      "Safety alignment changes how vision-language models behave, but no one had checked whether aligned models fail differently from their base models when images are blurred, noisy or otherwise degraded.",
+    role:
+      "Second of five authors. I built a reproducible evaluation pipeline across GQA, VQAv2 and TextVQA, with four corruption types at three severities.",
+    outcome:
+      "Accepted at the CVPR 2026 Workshop on Generative Models for Computer Vision. Alignment paradigm predicted robustness change better than model scale did.",
     highlights: [
       "CVPR 2026 Workshop on Generative Models for Computer Vision",
       "Four matched pairs: InternVL, Qwen2-VL, Gemma — GQA, VQAv2, TextVQA",
@@ -269,8 +347,13 @@ export const projects: Project[] = [
     category: "Commerce",
     summary:
       "Sole-engineered event ticketing stack: public API, organizer dashboard, embeddable checkout. Zero oversell at 800 concurrent buyers.",
-    description:
-      "A Turborepo with a NestJS public API, Next.js organizer dashboard, and embeddable Next.js checkout on Prisma, PostgreSQL, Redis, and BullMQ. Correctness is enforced in code: single-writer capacity, server-side price computation, integer-pesewa money, and a mandatory Idempotency-Key on writes — architectural tests fail CI when the rules break. Paystack for card and mobile money, HMAC-signed QR tickets, an offline-capable phone scanner, refunds, transfers, and a sold-out waitlist. Load-tested an on-sale (800 concurrent buyers, 100 tickets, zero oversell) and caught a reverse-proxy rate-limit that would have rejected real buyers after ~8 requests.",
+    metric: { value: "0", label: "tickets oversold with 800 concurrent buyers chasing 100" },
+    problem:
+      "Organizers want to sell from their own site, and on-sale spikes are where ticketing breaks: seats sold twice, prices changed in the browser, payments charged twice on retry.",
+    role:
+      "Sole engineer: public API, organizer dashboard, embeddable checkout, phone scanner and deployment.",
+    outcome:
+      "The load test sold 100 tickets to 800 concurrent buyers with zero oversell. It also caught a reverse-proxy rate limit that would have turned real buyers away after about 8 requests.",
     highlights: [
       "Zero oversell under 800 concurrent buyers for 100 tickets",
       "Idempotency-Key, integer money, and single-writer capacity enforced by architectural tests",
@@ -299,8 +382,13 @@ export const projects: Project[] = [
     category: "Computer vision",
     summary:
       "PyTorch replication of Ronneberger et al. across four medical datasets, plus a skip-connection ablation.",
-    description:
-      "A clean PyTorch replication of U-Net for biomedical image segmentation, evaluated on ISBI electron microscopy, BUSI ultrasound, MSD Spleen CT, and MSD Hippocampus MRI. Dice scores: 0.864 (ISBI), 0.864 (BUSI), 0.971 (Spleen), 0.909 (Hippocampus). An ablation showed skip connections are critical for small structures — tumor Dice dropped 15.9% without them.",
+    metric: { value: "0.971", label: "Dice score on MSD Spleen CT" },
+    problem:
+      "Does the original U-Net hold up beyond the electron-microscopy data it was published on, and which parts of the architecture actually matter?",
+    role:
+      "Reimplemented U-Net in PyTorch and ran the skip-connection ablation.",
+    outcome:
+      "Dice of 0.864 (ISBI), 0.864 (BUSI), 0.971 (Spleen) and 0.909 (Hippocampus). Removing skip connections cut tumour Dice by 15.9%.",
     highlights: [
       "One config switch across EM, ultrasound, CT, and MRI",
       "Dice 0.971 on MSD Spleen, 0.909 on Hippocampus",
@@ -319,8 +407,13 @@ export const projects: Project[] = [
     category: "Healthcare AI",
     summary:
       "Clinical consultation transcription with medical NER for symptoms, diagnoses, and medications.",
-    description:
-      "MediVoice is a healthcare application for clinical consultation transcription. An ASR pipeline captures doctor-patient conversation in real time. A NER layer extracts medical entities — symptoms, diagnoses, medications — with domain adaptation for specialized vocabulary.",
+    metric: { value: "3", label: "clinical entity types extracted: symptoms, diagnoses, medications" },
+    problem:
+      "Doctors lose consultation time to note-taking, and general-purpose speech models stumble over clinical vocabulary.",
+    role:
+      "Designed and built the app, including the ASR pipeline and the medical NER layer.",
+    outcome:
+      "Consultations are transcribed in real time, with symptoms, diagnoses and medications pulled out automatically. The app is live.",
     highlights: [
       "Real-time consultation transcription",
       "Medical NER for symptoms, diagnoses, and medications",
@@ -340,8 +433,13 @@ export const projects: Project[] = [
     category: "Multi-tenant",
     summary:
       "Flutter + Firebase partnership management with RBAC, invitations, and bilingual EN/FR surfaces.",
-    description:
-      "Pillr is a multi-tenant church partnership management system. Hierarchical permissions, invitation workflows, and domain configuration sit on Flutter and Firebase. The app ships English and French. Test suite: 124 app tests plus Cloud Functions tests on the money path against emulators.",
+    metric: { value: "124", label: "Flutter tests, plus Cloud Functions tests that only run against emulators" },
+    problem:
+      "Churches running partnership programmes need each organisation's data kept apart, with admins, pastors and staff seeing only what their role allows, in English and French.",
+    role:
+      "Engineered the system: multi-tenant architecture, invitations and role-based access, and custom-domain setup.",
+    outcome:
+      "A bilingual multi-tenant Flutter and Firebase app whose money-path tests refuse to touch anything but the emulators.",
     highlights: [
       "Multi-tenant architecture with admin, pastor, and staff roles",
       "Invitation workflows and hierarchical permissions",
@@ -360,8 +458,13 @@ export const projects: Project[] = [
     category: "Speech",
     summary:
       "RNN, GRU, BiLSTM, and attention ASR on AfriSpeech-200 (Twi) and LibriSpeech, reported in WER and CER.",
-    description:
-      "Automatic speech recognition pipelines in PyTorch and Torchaudio. Models include vanilla RNNs, attention-based RNNs, GRUs, and bidirectional LSTMs. Audio preprocessing uses MFCC and spectrogram features. One track trains on AfriSpeech-200 (Twi) with CTC loss; another benchmarks on LibriSpeech.",
+    metric: { value: "4", label: "recurrent model families benchmarked" },
+    problem:
+      "Most speech models learn from English audiobooks. How do standard recurrent architectures cope with Twi?",
+    role:
+      "Built the training pipelines and ran the benchmarks.",
+    outcome:
+      "WER and CER compared across vanilla RNN, attention RNN, GRU and BiLSTM, on AfriSpeech-200 Twi and on LibriSpeech.",
     highlights: [
       "CTC training on AfriSpeech-200 Twi",
       "MFCC and spectrogram feature extraction",
@@ -380,8 +483,12 @@ export const projects: Project[] = [
     category: "Robotics",
     summary:
       "Drone-based environmental monitoring with autonomous flight, CO₂ and temperature sensing.",
-    description:
-      "Collaborative drone system for aerial environmental data collection. Autonomous flight logic on the Parrot Olympe SDK, temperature and CO₂ sensors on a Raspberry Pi companion computer, Pixhawk 6C controllers, QGroundControl, and real-time telemetry.",
+    problem:
+      "Collecting environmental readings across an area by hand is slow and patchy. A drone on a set route covers it faster and more evenly.",
+    role:
+      "Team project. I wrote the autonomous flight logic, wired the CO₂ and temperature sensors to the Raspberry Pi, and ran flight operations.",
+    outcome:
+      "Autonomous flights on Parrot Olympe with live telemetry through QGroundControl and CO₂ and temperature readings taken in the air.",
     highlights: [
       "Autonomous flight on Parrot Olympe",
       "CO₂ and temperature sensing on Raspberry Pi",

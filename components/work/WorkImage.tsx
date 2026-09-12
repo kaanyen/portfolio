@@ -1,12 +1,36 @@
+import Image from "next/image";
+import { stills } from "@/lib/data";
+
 type WorkImageProps = {
   src: string;
-  alt: string;
+  sizes: string;
   className?: string;
+  eager?: boolean;
+  // Show the still's caption under it. Off for the hero image, whose context
+  // is the page heading.
+  captioned?: boolean;
 };
 
-export function WorkImage({ src, alt, className }: WorkImageProps) {
+export function WorkImage({ src, sizes, className, eager, captioned }: WorkImageProps) {
+  const still = stills[src] ?? { width: 1440, height: 900, caption: "" };
+  const image = (
+    <Image
+      src={src}
+      alt={still.caption}
+      width={still.width}
+      height={still.height}
+      sizes={sizes}
+      loading={eager ? "eager" : "lazy"}
+      className={`work-still ${className ?? ""}`}
+    />
+  );
+
+  if (!captioned || !still.caption) return image;
+
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img src={src} alt={alt} className={`work-still ${className ?? ""}`} />
+    <figure className="work-figure">
+      {image}
+      <figcaption>{still.caption}</figcaption>
+    </figure>
   );
 }
