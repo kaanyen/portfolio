@@ -41,18 +41,11 @@ export function EmailCta() {
       }, 1800);
     };
 
-    const start = () => {
-      clearAll();
-      setWaving(false);
-      later(play, 800);
-    };
-
-    window.addEventListener("page-ready", start);
-    if (document.querySelector(".page-loader.is-gone")) start();
+    // First wave shortly after the page appears, then every 7–12 seconds.
+    later(play, 800);
 
     return () => {
       cancelled = true;
-      window.removeEventListener("page-ready", start);
       clearAll();
     };
   }, []);

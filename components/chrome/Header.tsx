@@ -11,6 +11,7 @@ import { icons } from "@/components/chrome/NavIcons";
 import { MenuOverlay } from "@/components/chrome/MenuOverlay";
 import { NavLink } from "@/components/chrome/NavLink";
 import { EmailCta } from "@/components/chrome/EmailCta";
+import { RecruiterView } from "@/components/chrome/RecruiterView";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -26,6 +27,7 @@ export function Header() {
             </Link>
 
             <div className="header-actions">
+              <RecruiterView />
               <EmailCta />
               <a
                 href={site.cv}

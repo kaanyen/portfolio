@@ -694,9 +694,35 @@ export const writing = [
       "Do Safety-Aligned Vision-Language Models Degrade Differently Under Common Image Corruptions?",
     venue: "CVPR 2026 Workshops · Generative Models for Computer Vision",
     authors: "P. Mireku, K.-A. Attah-Anyen, A. Nartey, N. Nanka-Bruce, B. Blankson",
+    // How my name appears in the author list, so it can be highlighted.
+    you: "K.-A. Attah-Anyen",
     href: "https://generative-vision.github.io/workshop-CVPR-26/papers/21.pdf",
+    finding: {
+      value: "17%",
+      label: "fewer corruption errors with MPO alignment (relative mCE 0.830)",
+    },
+    caseStudy: "vlm-corruption",
+    bibtex: `@inproceedings{mireku2026safetyaligned,
+  title     = {Do Safety-Aligned Vision-Language Models Degrade Differently Under Common Image Corruptions?},
+  author    = {Mireku, P. and Attah-Anyen, K.-A. and Nartey, A. and Nanka-Bruce, N. and Blankson, B.},
+  booktitle = {IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops, Workshop on Generative Models for Computer Vision},
+  year      = {2026},
+  url       = {https://generative-vision.github.io/workshop-CVPR-26/papers/21.pdf}
+}`,
   },
 ];
+
+export type Testimonial = {
+  quote: string;
+  name: string;
+  role: string;
+  org: string;
+};
+
+// Real quotes only, used with the person's permission. The homepage section
+// stays hidden while this list is empty. Shape of an entry:
+// { quote: "What they said.", name: "Their name", role: "Their title", org: "SyneroLabs" },
+export const testimonials: Testimonial[] = [];
 
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);

@@ -1843,28 +1843,6 @@ img {
   object-fit: cover;
 }
 
-.page-loader {
-  position: fixed;
-  inset: 0;
-  z-index: 80;
-  display: grid;
-  place-items: center;
-  background: var(--bg);
-  pointer-events: none;
-}
-
-.page-loader-piece {
-  display: grid;
-  place-items: center;
-  color: var(--burgundy);
-  opacity: 0;
-}
-
-.page-loader-mark {
-  width: 1.2rem;
-  height: 2.75rem;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .marquee-track,
   .hero-scroll span,
@@ -1897,5 +1875,585 @@ img {
   [data-hero-fade] {
     transform: none !important;
     opacity: 1 !important;
+  }
+}
+
+/* Case study: the answer first, under the headline number. */
+.case-glance {
+  display: grid;
+  gap: 1rem 2rem;
+  max-width: 60rem;
+  margin: 1.75rem 0 0;
+}
+
+@media (min-width: 800px) {
+  .case-glance {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.case-glance dt {
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.case-glance dd {
+  margin: 0.35rem 0 0;
+  font-size: 1.02rem;
+  line-height: 1.4;
+  color: var(--base);
+}
+
+.case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.case-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--burgundy);
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--burgundy);
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.case-link:first-child {
+  background: var(--burgundy);
+  color: var(--ivory);
+}
+
+.case-link:hover {
+  border-color: var(--burgundy-deep);
+  background: var(--burgundy-deep);
+  color: var(--ivory);
+}
+
+.case-link:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 3px;
+}
+
+/* Stack tags that open the Works page filtered to that skill. */
+.stack-list .stack-link {
+  border: 1px solid #ddd6c8;
+  border-radius: 999px;
+  padding: 0.28rem 0.65rem;
+  font-size: 0.82rem;
+  color: #3b342f;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.stack-list .stack-link:hover,
+.stack-list .stack-link:focus-visible {
+  border-color: var(--burgundy);
+  background: color-mix(in srgb, var(--burgundy) 7%, transparent);
+  color: var(--burgundy);
+}
+
+.stack-list .stack-link:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 2px;
+}
+
+/* Publication: the paper, its headline finding, and ways to use it. */
+.pub {
+  display: grid;
+  gap: 2rem;
+  padding: clamp(1.4rem, 3vw, 2.4rem);
+  border-radius: var(--radius);
+  background: var(--bg-d);
+}
+
+@media (min-width: 900px) {
+  .pub {
+    grid-template-columns: minmax(0, 1.6fr) minmax(14rem, 0.7fr);
+    align-items: center;
+  }
+}
+
+.pub-venue {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+}
+
+.pub-title {
+  max-width: 30ch;
+  margin-top: 0.75rem;
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--base);
+  text-wrap: balance;
+}
+
+.pub-authors {
+  margin-top: 0.9rem;
+  color: var(--grey);
+}
+
+.pub-authors strong {
+  font-weight: 600;
+  color: var(--base);
+}
+
+.pub-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1rem;
+  margin-top: 1.5rem;
+}
+
+.pub-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--burgundy);
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--burgundy);
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.pub-button:hover {
+  background: color-mix(in srgb, var(--burgundy) 8%, transparent);
+}
+
+.pub-button-primary {
+  background: var(--burgundy);
+  color: var(--ivory);
+}
+
+.pub-button-primary:hover {
+  border-color: var(--burgundy-deep);
+  background: var(--burgundy-deep);
+}
+
+.pub-button:focus-visible,
+.pub-link:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 3px;
+}
+
+.pub-link {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--burgundy);
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+.pub-finding {
+  display: grid;
+  gap: 0.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #ddd6c8;
+}
+
+@media (min-width: 900px) {
+  .pub-finding {
+    padding: 0 0 0 2rem;
+    border-top: 0;
+    border-left: 1px solid #ddd6c8;
+  }
+}
+
+.pub-finding-value {
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: clamp(3.4rem, 2.4rem + 4vw, 5.6rem);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  line-height: 0.85;
+  color: var(--burgundy);
+}
+
+.pub-finding-label {
+  max-width: 24ch;
+  line-height: 1.35;
+  color: var(--grey);
+}
+
+/* Testimonials: shown only once real quotes exist. */
+.quotes {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 800px) {
+  .quotes {
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  }
+}
+
+.quote {
+  display: grid;
+  align-content: space-between;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 1.75rem;
+  border-radius: var(--radius);
+  background: var(--bg-d);
+}
+
+.quote blockquote {
+  margin: 0;
+}
+
+.quote blockquote p {
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.2rem, 1rem + 0.8vw, 1.55rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+  color: var(--base);
+}
+
+.quote blockquote p::before {
+  content: "\201C";
+}
+
+.quote blockquote p::after {
+  content: "\201D";
+}
+
+.quote figcaption {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.quote-name {
+  font-weight: 600;
+  color: var(--base);
+}
+
+.quote-role {
+  font-size: 0.9rem;
+  color: var(--grey);
+}
+
+/* Works: filter the shelf by skill. */
+.skill-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid #ddd6c8;
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.88rem;
+  color: var(--base);
+  cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.skill-chip span {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  color: var(--grey);
+}
+
+.skill-chip:hover {
+  border-color: var(--burgundy);
+}
+
+.skill-chip[aria-pressed="true"] {
+  border-color: var(--burgundy);
+  background: var(--burgundy);
+  color: var(--ivory);
+}
+
+.skill-chip[aria-pressed="true"] span {
+  color: color-mix(in srgb, var(--ivory) 70%, transparent);
+}
+
+.skill-chip:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 2px;
+}
+
+.skill-status {
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+  color: var(--grey);
+}
+
+/* Recruiter view: a one-screen summary in a native dialog. */
+.header-recruiter {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+@media (max-width: 899px) {
+  .header-recruiter {
+    display: none;
+  }
+}
+
+.recruiter {
+  width: min(46rem, calc(100% - 2rem));
+  max-height: calc(100dvh - 2rem);
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  border: 0;
+  border-radius: 1rem;
+  background: var(--bg);
+  color: var(--base);
+  box-shadow: 0 30px 80px -30px rgba(58, 21, 32, 0.55);
+}
+
+.recruiter::backdrop {
+  background: rgba(58, 21, 32, 0.45);
+  backdrop-filter: blur(3px);
+}
+
+.recruiter[open] {
+  animation: recruiter-in 260ms cubic-bezier(0.22, 0.75, 0.2, 1);
+}
+
+@keyframes recruiter-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+}
+
+.recruiter-inner {
+  display: grid;
+  gap: 1.6rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.recruiter-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.recruiter-kicker {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.recruiter-head h2 {
+  margin-top: 0.4rem;
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.recruiter-sub {
+  margin-top: 0.4rem;
+  color: var(--grey);
+}
+
+.recruiter-close {
+  flex: 0 0 auto;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid #ddd6c8;
+  border-radius: 999px;
+  background: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--base);
+  cursor: pointer;
+}
+
+.recruiter-close:hover {
+  border-color: var(--burgundy);
+  color: var(--burgundy);
+}
+
+.recruiter-block h3 {
+  margin-bottom: 0.7rem;
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.recruiter-picks {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recruiter-picks a {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.75rem;
+  background: var(--bg-d);
+  transition: background-color 160ms ease;
+}
+
+.recruiter-picks a:hover {
+  background: color-mix(in srgb, var(--burgundy) 9%, var(--bg-d));
+}
+
+.recruiter-picks a:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 2px;
+}
+
+.recruiter-metric {
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: 1.7rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--burgundy);
+}
+
+.recruiter-picks b {
+  display: block;
+  color: var(--base);
+}
+
+.recruiter-picks a span span {
+  display: block;
+  font-size: 0.86rem;
+  line-height: 1.3;
+  color: var(--grey);
+}
+
+.recruiter-columns {
+  display: grid;
+  gap: 1.6rem;
+}
+
+@media (min-width: 700px) {
+  .recruiter-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.recruiter-list {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recruiter-list li {
+  display: grid;
+  gap: 0.05rem;
+}
+
+.recruiter-list b {
+  font-weight: 600;
+  color: var(--base);
+}
+
+.recruiter-list span {
+  font-size: 0.86rem;
+  color: var(--grey);
+}
+
+.recruiter-block .recruiter-tools-label {
+  margin-top: 1.4rem;
+}
+
+.recruiter-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid #ddd6c8;
+}
+
+.recruiter-actions a {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ddd6c8;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--base);
+}
+
+.recruiter-actions a:hover {
+  border-color: var(--burgundy);
+  color: var(--burgundy);
+}
+
+.recruiter-actions a:focus-visible,
+.recruiter-close:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 2px;
+}
+
+.recruiter-actions .recruiter-primary {
+  border-color: var(--burgundy);
+  background: var(--burgundy);
+  color: var(--ivory);
+}
+
+.recruiter-actions .recruiter-primary:hover {
+  background: var(--burgundy-deep);
+  color: var(--ivory);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .case-link,
+  .pub-button,
+  .skill-chip,
+  .stack-list .stack-link,
+  .recruiter-picks a {
+    transition: none;
+  }
+
+  .recruiter[open] {
+    animation: none;
   }
 }

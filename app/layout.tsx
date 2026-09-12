@@ -3,7 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { Header } from "@/components/chrome/Header";
 import { SmoothScroll } from "@/components/chrome/SmoothScroll";
-import { PageLoader } from "@/components/chrome/PageLoader";
 import { Footer } from "@/components/footer/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { site } from "@/lib/site";
@@ -53,7 +52,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="site-shell min-h-full font-body">
         <JsonLd data={person} />
         <SmoothScroll />
-        <PageLoader />
         <Header />
         {children}
         <Footer />
