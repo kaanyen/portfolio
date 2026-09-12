@@ -706,6 +706,201 @@ img {
   line-height: 1.2;
 }
 
+.work-shelf {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13.5rem), 1fr));
+  gap: 2.5rem 1.75rem;
+}
+
+.work-book {
+  --book-t: 10px;
+  display: flex;
+  flex-direction: column;
+  color: var(--base);
+}
+
+.work-book:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 6px;
+}
+
+.work-book-stage {
+  position: relative;
+  display: block;
+  perspective: 1000px;
+}
+
+/* A thin box: the front and back sit half the thickness off the centre
+   plane, and the four side faces close it. Hover turns it to show the
+   spine, as a hardback on a table would. */
+.work-book-object {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 4;
+  max-width: 100%;
+  transform-style: preserve-3d;
+  transition: transform 520ms cubic-bezier(0.22, 0.75, 0.2, 1);
+}
+
+.work-book:hover .work-book-object,
+.work-book:focus-visible .work-book-object {
+  transform: translateY(-5px) rotateX(2deg) rotateY(8deg);
+}
+
+.work-book-face {
+  position: absolute;
+  display: block;
+  backface-visibility: hidden;
+}
+
+.work-book-front,
+.work-book-back {
+  inset: 0;
+  border-radius: 2px 4px 4px 2px;
+  background: var(--card-bg, var(--burgundy));
+}
+
+.work-book-front {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1.1rem 1rem 1rem 1.45rem;
+  color: var(--card-ink, var(--bg));
+  transform: translateZ(calc(var(--book-t) / 2));
+  /* The left strip reads as the hinge of a hardback cover. */
+  box-shadow:
+    inset 0.42rem 0 0 color-mix(in srgb, #000 14%, transparent),
+    inset 0.5rem 0 0 color-mix(in srgb, #fff 16%, transparent),
+    0 1px 2px color-mix(in srgb, var(--burgundy-deep) 14%, transparent),
+    0 12px 26px -12px color-mix(in srgb, var(--burgundy-deep) 34%, transparent);
+}
+
+.work-book-back {
+  transform: rotateY(180deg) translateZ(calc(var(--book-t) / 2));
+}
+
+.work-book-spine,
+.work-book-edge {
+  top: 0;
+  width: var(--book-t);
+  height: 100%;
+}
+
+.work-book-spine {
+  left: calc(var(--book-t) / -2);
+  background: color-mix(in srgb, var(--card-bg, var(--burgundy)) 78%, #000);
+  transform: rotateY(-90deg);
+}
+
+.work-book-edge {
+  left: calc(100% - var(--book-t) / 2);
+  background: repeating-linear-gradient(90deg, #f6efe2 0 1px, #e6dac5 1px 2px);
+  transform: rotateY(90deg);
+}
+
+.work-book-top,
+.work-book-bottom {
+  left: 0;
+  width: 100%;
+  height: var(--book-t);
+  background: repeating-linear-gradient(0deg, #f6efe2 0 1px, #e6dac5 1px 2px);
+}
+
+.work-book-top {
+  top: calc(var(--book-t) / -2);
+  transform: rotateX(90deg);
+}
+
+.work-book-bottom {
+  top: calc(100% - var(--book-t) / 2);
+  transform: rotateX(-90deg);
+}
+
+.work-book-front .color-card-mark {
+  right: -1.2rem;
+  bottom: -1.2rem;
+  width: 62%;
+  height: auto;
+  aspect-ratio: 1;
+  opacity: 0.14;
+}
+
+.work-book-kicker,
+.work-book-title,
+.work-book-year {
+  position: relative;
+  z-index: 1;
+}
+
+.work-book-kicker {
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.72;
+}
+
+.work-book-title {
+  margin-top: 0.6rem;
+  font-family: var(--font-display), Arial, sans-serif;
+  font-size: clamp(1.35rem, 1.1rem + 0.6vw, 1.7rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.work-book-year {
+  margin-top: auto;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  opacity: 0.72;
+}
+
+.work-book-cta {
+  position: absolute;
+  left: 50%;
+  bottom: 0.9rem;
+  z-index: 2;
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  background: var(--bg);
+  color: var(--base);
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 6px 16px color-mix(in srgb, #000 18%, transparent);
+  opacity: 0;
+  transform: translate(-50%, 6px);
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease;
+}
+
+.work-book:hover .work-book-cta,
+.work-book:focus-visible .work-book-cta {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.work-book-caption {
+  margin-top: 1rem;
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.work-book-meta {
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--grey);
+}
+
 .mosaic {
   display: grid;
   gap: 1rem;
@@ -782,61 +977,71 @@ img {
 }
 
 .color-card[data-tone="purple"],
-.work-cover[data-tone="purple"] {
+.work-cover[data-tone="purple"],
+.work-book[data-tone="purple"] {
   --card-bg: #6b1d32;
   --card-ink: #f4ede3;
 }
 
 .color-card[data-tone="orange"],
-.work-cover[data-tone="orange"] {
+.work-cover[data-tone="orange"],
+.work-book[data-tone="orange"] {
   --card-bg: #ff7722;
   --card-ink: #171412;
 }
 
 .color-card[data-tone="red"],
-.work-cover[data-tone="red"] {
+.work-cover[data-tone="red"],
+.work-book[data-tone="red"] {
   --card-bg: #ff3c34;
   --card-ink: #fbf9ef;
 }
 
 .color-card[data-tone="yellow"],
-.work-cover[data-tone="yellow"] {
+.work-cover[data-tone="yellow"],
+.work-book[data-tone="yellow"] {
   --card-bg: #ffc765;
   --card-ink: #171412;
 }
 
 .color-card[data-tone="ink"],
-.work-cover[data-tone="ink"] {
+.work-cover[data-tone="ink"],
+.work-book[data-tone="ink"] {
   --card-bg: #171412;
   --card-ink: #fbf9ef;
 }
 
 .color-card[data-tone="teal"],
-.work-cover[data-tone="teal"] {
+.work-cover[data-tone="teal"],
+.work-book[data-tone="teal"] {
   --card-bg: #1f6b63;
   --card-ink: #fbf9ef;
 }
 
 .color-card[data-tone="olive"],
-.work-cover[data-tone="olive"] {
+.work-cover[data-tone="olive"],
+.work-book[data-tone="olive"] {
   --card-bg: #5c6b3a;
   --card-ink: #fbf9ef;
 }
 
 .color-card[data-tone="clay"],
-.work-cover[data-tone="clay"] {
+.work-cover[data-tone="clay"],
+.work-book[data-tone="clay"] {
   --card-bg: #c45c3e;
   --card-ink: #fbf9ef;
 }
 
 .color-card[data-tone="wine"],
-.work-cover[data-tone="wine"] {
+.work-cover[data-tone="wine"],
+.work-book[data-tone="wine"] {
   --card-bg: #7a2e4a;
   --card-ink: #fbf9ef;
 }
 
 .color-card[data-tone="forest"],
-.work-cover[data-tone="forest"] {
+.work-cover[data-tone="forest"],
+.work-book[data-tone="forest"] {
   --card-bg: #2d4a3e;
   --card-ink: #fbf9ef;
 }
@@ -1324,6 +1529,11 @@ img {
   .color-card:hover,
   .color-card:focus-visible {
     transform: none;
+  }
+
+  .work-book-object,
+  .work-book-cta {
+    transition: none;
   }
 
   .reveal-line span,

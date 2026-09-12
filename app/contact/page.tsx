@@ -4,6 +4,9 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
+  description:
+    "Hire or collaborate with Kweku Anyen, a software engineer and AI researcher based in Accra, Ghana.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {
