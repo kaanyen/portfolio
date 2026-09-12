@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { projects } from "@/lib/data";
+import { skillCounts } from "@/lib/skills";
 import { WorkShelf } from "@/components/work/WorkShelf";
+import { WorksExplorer } from "@/components/work/WorksExplorer";
 
 export const metadata: Metadata = {
   title: "Works",
@@ -22,7 +25,11 @@ export default function WorksPage() {
           Featured CV projects and additional research, products, and systems
           work.
         </p>
-        <WorkShelf projects={projects} />
+        {/* The filter reads ?skill= in the browser; the prerendered HTML
+            carries the full shelf until it takes over. */}
+        <Suspense fallback={<WorkShelf projects={projects} />}>
+          <WorksExplorer projects={projects} skills={skillCounts()} />
+        </Suspense>
       </div>
     </main>
   );

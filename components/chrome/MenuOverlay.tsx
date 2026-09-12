@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { nav } from "@/lib/data";
 import { site } from "@/lib/site";
 import { NavLink } from "@/components/chrome/NavLink";
+import { RECRUITER_OPEN } from "@/components/chrome/RecruiterView";
 
 function focusables(root: HTMLElement | null) {
   return [
@@ -77,6 +78,18 @@ export function MenuOverlay({ onClose }: { onClose: () => void }) {
         ))}
       </nav>
       <div className="flex flex-wrap gap-6 text-sm text-grey">
+        {/* The header's Recruiter view button is hidden on small screens, so
+            the menu opens the same dialog. The href is the no-JS fallback. */}
+        <a
+          href="#recruiter"
+          onClick={(event) => {
+            event.preventDefault();
+            onClose();
+            window.dispatchEvent(new Event(RECRUITER_OPEN));
+          }}
+        >
+          Recruiter view
+        </a>
         <a href={`mailto:${site.email}`}>{site.email}</a>
         <a href={site.linkedin} target="_blank" rel="noreferrer">
           LinkedIn

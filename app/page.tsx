@@ -2,6 +2,7 @@ import { Hero } from "@/components/hero/Hero";
 import { FeaturedWork } from "@/components/work/FeaturedWork";
 import { Experience } from "@/components/about/Experience";
 import { Writing } from "@/components/about/Writing";
+import { Testimonials } from "@/components/about/Testimonials";
 import { ScrollToHash } from "@/components/chrome/ScrollToHash";
 
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
       <FeaturedWork />
       <Writing />
       <Experience />
+      <Testimonials />
     </main>
   );
 }

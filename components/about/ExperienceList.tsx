@@ -17,7 +17,8 @@ export type ExperienceItem = {
   monogram: string;
   // Newest first.
   positions: { title: string; dates: string; points: string[] }[];
-  stack: string[];
+  // Tags that match a project's stack link to the filtered Works page.
+  stack: { name: string; linked: boolean }[];
   caseStudy?: { slug: string; title: string };
 };
 
@@ -189,9 +190,20 @@ export function ExperienceList({ items }: { items: ExperienceItem[] }) {
                       )}
                       {item.stack.length ? (
                         <div className="stack-list role-stack">
-                          {item.stack.map((tag) => (
-                            <span key={tag}>{tag}</span>
-                          ))}
+                          {item.stack.map((tag) =>
+                            tag.linked ? (
+                              <Link
+                                key={tag.name}
+                                href={`/works?skill=${encodeURIComponent(tag.name)}`}
+                                className="stack-link"
+                                title={`Projects that use ${tag.name}`}
+                              >
+                                {tag.name}
+                              </Link>
+                            ) : (
+                              <span key={tag.name}>{tag.name}</span>
+                            ),
+                          )}
                         </div>
                       ) : null}
                       {item.caseStudy ? (

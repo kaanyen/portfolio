@@ -9,6 +9,12 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+// "Intern at X since June 2026. I work across…" → "Intern at X since June 2026."
+function firstSentence(text: string) {
+  const match = text.match(/^.*?[.!?](?=\s|$)/);
+  return match ? match[0] : text;
+}
+
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
 }
@@ -32,6 +38,18 @@ export default async function WorkPage({ params }: Props) {
   const stills = projectStills(project);
   const hero = isStill(project.image) ? project.image : stills[0];
   const gallery = stills.filter((src) => src !== hero);
+  const links = [
+    project.href
+      ? {
+          href: project.href,
+          label: project.href.includes("pdf")
+            ? "Read the paper ↗"
+            : "Visit the live site ↗",
+        }
+      : null,
+    project.repo ? { href: project.repo, label: "View the code ↗" } : null,
+  ].filter((link): link is { href: string; label: string } => link !== null);
+  const extraTools = project.stack.length - 4;
 
   return (
     <main className="page-hero">
@@ -49,6 +67,43 @@ export default async function WorkPage({ params }: Props) {
           <div className="case-metric">
             <span className="case-metric-value">{project.metric.value}</span>
             <span className="case-metric-label">{project.metric.label}</span>
+          </div>
+        ) : null}
+
+        {/* The answer first: role, result and tools before the long read. */}
+        <dl className="case-glance">
+          {project.role ? (
+            <div>
+              <dt>My role</dt>
+              <dd>{firstSentence(project.role)}</dd>
+            </div>
+          ) : null}
+          <div>
+            <dt>Result</dt>
+            <dd>{firstSentence(project.outcome)}</dd>
+          </div>
+          <div>
+            <dt>Built with</dt>
+            <dd>
+              {project.stack.slice(0, 4).join(", ")}
+              {extraTools > 0 ? ` +${extraTools} more` : ""}
+            </dd>
+          </div>
+        </dl>
+
+        {links.length ? (
+          <div className="case-links">
+            {links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="case-link"
+              >
+                {link.label}
+              </a>
+            ))}
           </div>
         ) : null}
 
@@ -93,20 +148,17 @@ export default async function WorkPage({ params }: Props) {
             <p className="text-youth mb-3 uppercase">Stack</p>
             <div className="stack-list">
               {project.stack.map((item) => (
-                <span key={item}>{item}</span>
+                <Link
+                  key={item}
+                  href={`/works?skill=${encodeURIComponent(item)}`}
+                  className="stack-link"
+                  title={`Projects that use ${item}`}
+                >
+                  {item}
+                </Link>
               ))}
             </div>
             <div className="mt-6 flex flex-col gap-2">
-              {project.href ? (
-                <a href={project.href} target="_blank" rel="noreferrer">
-                  {project.href.includes("pdf") ? "Paper →" : "Live site →"}
-                </a>
-              ) : null}
-              {project.repo ? (
-                <a href={project.repo} target="_blank" rel="noreferrer">
-                  Repository →
-                </a>
-              ) : null}
               <Link href="/works">All work →</Link>
             </div>
           </aside>

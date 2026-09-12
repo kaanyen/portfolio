@@ -1,5 +1,6 @@
 import { getProject, orgByName, roles } from "@/lib/data";
 import type { Position } from "@/lib/data";
+import { skillCounts } from "@/lib/skills";
 import { ExperienceList } from "@/components/about/ExperienceList";
 import type { ExperienceItem } from "@/components/about/ExperienceList";
 
@@ -37,6 +38,7 @@ function years(positions: Position[]) {
 export function Experience() {
   // Prepared here so the client list gets plain data, not the whole
   // project catalogue.
+  const known = new Set(skillCounts().map((skill) => skill.name));
   const items: ExperienceItem[] = roles.map((role) => {
     const org = orgByName(role.org);
     const project = role.caseStudy ? getProject(role.caseStudy) : undefined;
@@ -49,7 +51,10 @@ export function Experience() {
       mark: org?.mark ? { src: org.mark, width: org.markWidth } : undefined,
       monogram: initials(role.org),
       positions: role.positions,
-      stack: role.stack ?? [],
+      stack: (role.stack ?? []).map((name) => ({
+        name,
+        linked: known.has(name),
+      })),
       caseStudy: project
         ? { slug: project.slug, title: project.title }
         : undefined,

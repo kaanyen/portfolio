@@ -24,30 +24,13 @@ export function Hero() {
         return;
       }
 
-      gsap.set(pieces, { opacity: 0, y: 16 });
-
-      const play = () => {
-        gsap.to(pieces, {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power2.out",
-        });
-      };
-
-      if (document.querySelector(".page-loader.is-gone")) {
-        play();
-        return;
-      }
-
-      const onReady = () => play();
-      window.addEventListener("page-ready", onReady, { once: true });
-      const fallback = window.setTimeout(play, 900);
-      return () => {
-        window.removeEventListener("page-ready", onReady);
-        window.clearTimeout(fallback);
-      };
+      // Plays straight away: the headline should be readable within about
+      // half a second, with no loader in front of it.
+      gsap.fromTo(
+        pieces,
+        { opacity: 0, y: 12 },
+        { opacity: 1, y: 0, duration: 0.5, stagger: 0.06, ease: "power2.out" },
+      );
     },
     { scope: root },
   );
