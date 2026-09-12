@@ -89,6 +89,10 @@ export type Role = {
   dates: string;
   location: string;
   points: string[];
+  // Tools shown as tags under the points, so the points can say what was built.
+  stack?: string[];
+  // Slug of a case study that covers this role's work.
+  caseStudy?: string;
 };
 
 export type Org = {
@@ -552,10 +556,12 @@ export const roles: Role[] = [
     location: "Accra",
     points: [
       "Boafo Runtime: encryption, tenant secrets, LangGraph guardrails, hardened model adapters",
-      "Boafo App: insurance workspace in Next.js 16 / React 19, Prisma / NestJS / tRPC case domain",
+      "Boafo App: insurance workspace and its case domain, front end to API",
       "Boafo Commerce: RBAC, tenancy, encrypted backups, internal support console",
       "Led UI/UX direction for the config-driven Project Workspace across Insurance, Logistics, OMC",
     ],
+    stack: ["Next.js 16", "React 19", "NestJS", "tRPC", "Prisma", "LangGraph"],
+    caseStudy: "boafo",
   },
   {
     org: "iSpace Foundation",
