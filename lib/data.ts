@@ -83,13 +83,19 @@ export type ShipItem = {
   related: string[];
 };
 
-export type Role = {
-  org: string;
+export type Position = {
   title: string;
   dates: string;
-  location: string;
   points: string[];
-  // Tools shown as tags under the points, so the points can say what was built.
+};
+
+// One entry per organisation. Positions run newest first, so a promotion
+// reads as one continuous stint rather than two separate jobs.
+export type Role = {
+  org: string;
+  location: string;
+  positions: Position[];
+  // Tools and disciplines shown as tags, so the points can say what was built.
   stack?: string[];
   // Slug of a case study that covers this role's work.
   caseStudy?: string;
@@ -551,66 +557,119 @@ export const ship: ShipItem[] = [
 export const roles: Role[] = [
   {
     org: "SyneroLabs",
-    title: "Software Engineering Intern — Full-Stack & Platform",
-    dates: "Jun 2026 — Present",
     location: "Accra",
-    points: [
-      "Boafo Runtime: encryption, tenant secrets, LangGraph guardrails, hardened model adapters",
-      "Boafo App: insurance workspace and its case domain, front end to API",
-      "Boafo Commerce: RBAC, tenancy, encrypted backups, internal support console",
-      "Led UI/UX direction for the config-driven Project Workspace across Insurance, Logistics, OMC",
+    positions: [
+      {
+        title: "Software Engineering Intern — Full-Stack & Platform",
+        dates: "Jun 2026 — Present",
+        points: [
+          "Boafo Runtime: encryption, tenant secrets, LangGraph guardrails, hardened model adapters",
+          "Boafo App: insurance workspace and its case domain, front end to API",
+          "Boafo Commerce: RBAC, tenancy, encrypted backups, internal support console",
+          "Led UI/UX direction for the config-driven Project Workspace across Insurance, Logistics, OMC",
+        ],
+      },
     ],
-    stack: ["Next.js 16", "React 19", "NestJS", "tRPC", "Prisma", "LangGraph"],
+    stack: [
+      "Python",
+      "FastAPI",
+      "LangGraph",
+      "Next.js 16",
+      "React 19",
+      "NestJS",
+      "tRPC",
+      "Prisma",
+      "PostgreSQL",
+    ],
     caseStudy: "boafo",
   },
   {
     org: "iSpace Foundation",
-    title: "Video and Visual Department Lead",
-    dates: "Jan 2025 — Aug 2025",
     location: "Accra",
-    points: [
-      "Led social video, graphics, and photography for programs and campaigns",
-      "Shot and edited event documentaries in Adobe Creative Suite",
-      "Reported campaign impact across the African tech ecosystem",
+    positions: [
+      {
+        title: "Video and Visual Department Lead",
+        dates: "Jan 2025 — Aug 2025",
+        points: [
+          "Led social video, graphics, and photography for programs and campaigns",
+          "Shot and edited event documentaries in Adobe Creative Suite",
+          "Reported campaign impact across the African tech ecosystem",
+        ],
+      },
+      {
+        title: "Media Assistant",
+        dates: "Mar 2021 — Dec 2024",
+        points: [
+          "Content, photography, and video for foundation programs over four years",
+        ],
+      },
+    ],
+    stack: [
+      "Adobe Creative Suite",
+      "Video production",
+      "Photography",
+      "Graphic design",
+      "Social media",
     ],
   },
   {
     org: "Wode Maya",
-    title: "Video Editor, Documentarian & Videographer",
-    dates: "Feb 2025 — Aug 2025",
     location: "Remote",
-    points: [
-      "Edited for Africa’s most-watched travel and documentary YouTube channel",
-      "Color, sound, and motion design for platform-native formats",
+    positions: [
+      {
+        title: "Video Editor, Documentarian & Videographer",
+        dates: "Feb 2025 — Aug 2025",
+        points: [
+          "Edited for Africa’s most-watched travel and documentary YouTube channel",
+          "Color, sound, and motion design for platform-native formats",
+        ],
+      },
     ],
-  },
-  {
-    org: "iSpace Foundation",
-    title: "Media Assistant",
-    dates: "Mar 2021 — Dec 2024",
-    location: "Accra",
-    points: [
-      "Content, photography, and video for foundation programs over four years",
+    stack: [
+      "Color correction",
+      "Sound mixing",
+      "Motion design",
+      "Storyboarding",
+      "YouTube",
     ],
   },
   {
     org: "Brothers in Hue",
-    title: "Co-Founder & Media Specialist",
-    dates: "Aug 2019 — Present",
     location: "Ghana",
-    points: [
-      "Co-founded a creative studio: photo, video, drone, motion, then web, 3D, VFX, and AR",
-      "Ran client relationships, timelines, and creative direction",
+    positions: [
+      {
+        title: "Co-Founder & Media Specialist",
+        dates: "Aug 2019 — Present",
+        points: [
+          "Co-founded a creative studio: photo, video, drone, motion, then web, 3D, VFX, and AR",
+          "Ran client relationships, timelines, and creative direction",
+        ],
+      },
+    ],
+    stack: [
+      "Photography",
+      "Videography",
+      "Drone media",
+      "Motion design",
+      "Web development",
+      "3D animation",
+      "VFX",
+      "AR",
     ],
   },
   {
     org: "AirtelTigo",
-    title: "Tech Support",
-    dates: "Jun 2018 — Aug 2018",
     location: "Ghana",
-    points: [
-      "Account provisioning, deactivation, and security monitoring on the operator platform",
+    positions: [
+      {
+        title: "Tech Support",
+        dates: "Jun 2018 — Aug 2018",
+        points: [
+          "Account provisioning, deactivation, and security monitoring on the operator platform",
+        ],
+      },
     ],
+    stack: ["Account management", "Security monitoring"],
   },
 ];
 

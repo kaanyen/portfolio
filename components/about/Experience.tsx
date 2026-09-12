@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getProject, orgByName, roles } from "@/lib/data";
-import type { Org } from "@/lib/data";
+import type { Org, Position } from "@/lib/data";
 import { OrgMark } from "@/components/icons/OrgMark";
 
 // "iSpace Foundation" → "IF", "Brothers in Hue" → "BH", "AirtelTigo" → "AT".
@@ -11,6 +11,14 @@ function initials(name: string) {
       ? words.map((word) => word[0])
       : (name.match(/[A-Z]/g) ?? [name[0]]);
   return letters.slice(0, 2).join("").toUpperCase();
+}
+
+// Full span of a stint: start of the earliest position to the end of the
+// latest. Positions run newest first.
+function span(positions: Position[]) {
+  const end = positions[0].dates.split(" — ")[1];
+  const start = positions[positions.length - 1].dates.split(" — ")[0];
+  return `${start} — ${end}`;
 }
 
 // Orgs without a square mark get a monogram tile the same size, so every role
@@ -48,6 +56,16 @@ function RoleMark({ name, org }: { name: string; org?: Org }) {
   );
 }
 
+function Points({ points }: { points: string[] }) {
+  return (
+    <ul className="role-points">
+      {points.map((point) => (
+        <li key={point}>{point}</li>
+      ))}
+    </ul>
+  );
+}
+
 export function Experience() {
   return (
     <section className="section" id="experience">
@@ -69,8 +87,10 @@ export function Experience() {
             const caseStudy = role.caseStudy
               ? getProject(role.caseStudy)
               : undefined;
+            const [only] = role.positions;
+            const promoted = role.positions.length > 1;
             return (
-              <article key={`${role.org}-${role.title}`} className="role">
+              <article key={role.org} className="role">
                 <span className="role-mark">
                   <RoleMark name={role.org} org={org} />
                 </span>
@@ -78,19 +98,33 @@ export function Experience() {
                   <div className="role-head">
                     <div>
                       <h3>{role.org}</h3>
-                      <p className="role-title">{role.title}</p>
+                      {promoted ? null : (
+                        <p className="role-title">{only.title}</p>
+                      )}
                     </div>
                     <p className="role-when">
-                      {role.dates}
+                      {promoted ? span(role.positions) : only.dates}
                       <br />
                       {role.location}
                     </p>
                   </div>
-                  <ul className="role-points">
-                    {role.points.map((point) => (
-                      <li key={point}>{point}</li>
-                    ))}
-                  </ul>
+                  {promoted ? (
+                    <ol className="role-positions">
+                      {role.positions.map((position) => (
+                        <li key={position.title} className="role-position">
+                          <p className="role-position-title">
+                            {position.title}
+                          </p>
+                          <p className="role-position-dates">
+                            {position.dates}
+                          </p>
+                          <Points points={position.points} />
+                        </li>
+                      ))}
+                    </ol>
+                  ) : (
+                    <Points points={only.points} />
+                  )}
                   {role.stack ? (
                     <div className="stack-list role-stack">
                       {role.stack.map((item) => (
