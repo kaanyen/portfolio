@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { Header } from "@/components/chrome/Header";
 import { SmoothScroll } from "@/components/chrome/SmoothScroll";
 import { PageLoader } from "@/components/chrome/PageLoader";
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Header />
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
