@@ -32,6 +32,7 @@ export const metadata: Metadata = {
     icon: "/icon.png",
     apple: "/icon.png",
   },
+  alternates: { canonical: "/" },
   openGraph: {
     title: `${site.name} — ${site.title}`,
     description:
@@ -41,6 +42,25 @@ export const metadata: Metadata = {
   },
 };
 
+// Tells search engines who the site is about, so a name search can resolve
+// to one person with linked profiles.
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.fullName,
+  alternateName: site.name,
+  jobTitle: site.title,
+  url: site.url,
+  image: `${site.url}${site.portrait}`,
+  email: `mailto:${site.email}`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Accra",
+    addressCountry: "GH",
+  },
+  sameAs: [site.linkedin, site.github],
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -48,6 +68,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geist.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="site-shell min-h-full font-body">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <SmoothScroll />
         <PageLoader />
         <Header />

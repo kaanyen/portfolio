@@ -7,6 +7,9 @@ import { OrgMark } from "@/components/icons/OrgMark";
 
 export const metadata: Metadata = {
   title: "About",
+  description:
+    "About Kweku Anyen, a software engineer and AI researcher in Accra, Ghana: experience, education, and how he works.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

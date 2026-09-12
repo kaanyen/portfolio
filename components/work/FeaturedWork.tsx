@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { featuredProjects } from "@/lib/data";
-import { ColorCard } from "@/components/work/ColorCard";
+import { WorkShelf } from "@/components/work/WorkShelf";
 
 export function FeaturedWork() {
   return (
@@ -19,11 +19,7 @@ export function FeaturedWork() {
             </p>
           </div>
         </div>
-        <div className="mosaic">
-          {featuredProjects().map((project) => (
-            <ColorCard key={project.slug} project={project} />
-          ))}
-        </div>
+        <WorkShelf projects={featuredProjects()} />
         <Link href="/works" className="see-more-inline">
           See more work
         </Link>

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { projects } from "@/lib/data";
-import { ColorCard } from "@/components/work/ColorCard";
+import { WorkShelf } from "@/components/work/WorkShelf";
 
 export const metadata: Metadata = {
   title: "Works",
+  description:
+    "Case studies from Kweku Anyen: agent platforms, fintech fraud tooling, AI products, and a CVPR 2026 workshop paper.",
+  alternates: { canonical: "/works" },
 };
 
 export default function WorksPage() {
@@ -19,11 +22,7 @@ export default function WorksPage() {
           Featured CV projects and additional research, products, and systems
           work.
         </p>
-        <div className="mosaic">
-          {projects.map((project) => (
-            <ColorCard key={project.slug} project={project} />
-          ))}
-        </div>
+        <WorkShelf projects={projects} />
       </div>
     </main>
   );
