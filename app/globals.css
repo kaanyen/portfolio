@@ -1284,6 +1284,58 @@ img {
   color: var(--burgundy-deep);
 }
 
+/* Several positions at one org: a thin timeline joins them so a promotion
+   reads as one stint. */
+.role-positions {
+  display: grid;
+  gap: 1.35rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.role-position {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.role-position::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 0.5rem;
+  height: 0.5rem;
+  border: 1.5px solid var(--burgundy);
+  border-radius: 50%;
+  background: var(--bg);
+}
+
+.role-position:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: calc(0.25rem - 0.75px);
+  top: calc(0.45em + 0.6rem);
+  bottom: -1.2rem;
+  width: 1.5px;
+  background: color-mix(in srgb, var(--burgundy) 30%, transparent);
+}
+
+.role-position-title {
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.role-position-dates {
+  margin-top: 0.15rem;
+  font-size: 0.86rem;
+  color: var(--grey);
+}
+
+.role-position .role-points {
+  margin-top: 0.6rem;
+}
+
 .role-top {
   display: flex;
   justify-content: space-between;
