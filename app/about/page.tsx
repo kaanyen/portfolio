@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { education, orgByName } from "@/lib/data";
 import { site } from "@/lib/site";
+import { person } from "@/lib/structured-data";
 import { Experience } from "@/components/about/Experience";
 import { OrgMark } from "@/components/icons/OrgMark";
+import { JsonLd } from "@/components/seo/JsonLd";
 
 export const metadata: Metadata = {
   title: "About",
@@ -15,6 +17,13 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main>
+      <JsonLd
+        data={{
+          "@type": "ProfilePage",
+          url: `${site.url}/about`,
+          mainEntity: person,
+        }}
+      />
       <section className="page-hero">
         <div className="container about-grid">
           <div className="portrait-lg">
