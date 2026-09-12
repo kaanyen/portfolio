@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { getProject, orgByName, roles } from "@/lib/data";
-import type { Org, Position } from "@/lib/data";
-import { OrgMark } from "@/components/icons/OrgMark";
+import type { Position } from "@/lib/data";
+import { ExperienceList } from "@/components/about/ExperienceList";
+import type { ExperienceItem } from "@/components/about/ExperienceList";
 
 // "iSpace Foundation" → "IF", "Brothers in Hue" → "BH", "AirtelTigo" → "AT".
 function initials(name: string) {
@@ -13,138 +13,64 @@ function initials(name: string) {
   return letters.slice(0, 2).join("").toUpperCase();
 }
 
-// Full span of a stint: start of the earliest position to the end of the
-// latest. Positions run newest first.
-function span(positions: Position[]) {
-  const end = positions[0].dates.split(" — ")[1];
-  const start = positions[positions.length - 1].dates.split(" — ")[0];
-  return `${start} — ${end}`;
+// Positions run newest first, so the stint starts with the last one.
+function firstAndLast(positions: Position[]) {
+  const [from] = positions[positions.length - 1].dates.split(" — ");
+  const [, to] = positions[0].dates.split(" — ");
+  return { from, to };
 }
 
-// Orgs without a square mark get a monogram tile the same size, so every role
-// carries one.
-function RoleMark({ name, org }: { name: string; org?: Org }) {
-  if (org?.mark) {
-    return (
-      <OrgMark
-        name={org.name}
-        src={org.mark}
-        width={org.markWidth}
-        href={org.url}
-      />
-    );
-  }
-
-  const tile = (
-    <span className="role-monogram" aria-hidden>
-      {initials(name)}
-    </span>
-  );
-
-  if (!org?.url) return tile;
-
-  return (
-    <a
-      href={org.url}
-      target="_blank"
-      rel="noreferrer"
-      className="org-link"
-      aria-label={name}
-    >
-      {tile}
-    </a>
-  );
+// "Mar 2021 — Aug 2025", for the opened role.
+function when(positions: Position[]) {
+  const { from, to } = firstAndLast(positions);
+  return `${from} — ${to}`;
 }
 
-function Points({ points }: { points: string[] }) {
-  return (
-    <ul className="role-points">
-      {points.map((point) => (
-        <li key={point}>{point}</li>
-      ))}
-    </ul>
-  );
+// "2021–2025", "2019–now", or "2025", beside the company name.
+function years(positions: Position[]) {
+  const { from, to } = firstAndLast(positions);
+  const start = from.split(" ")[1];
+  const end = to === "Present" ? "now" : to.split(" ")[1];
+  return start === end ? start : `${start}–${end}`;
 }
 
 export function Experience() {
+  // Prepared here so the client list gets plain data, not the whole
+  // project catalogue.
+  const items: ExperienceItem[] = roles.map((role) => {
+    const org = orgByName(role.org);
+    const project = role.caseStudy ? getProject(role.caseStudy) : undefined;
+    return {
+      org: role.org,
+      location: role.location,
+      years: years(role.positions),
+      when: when(role.positions),
+      url: org?.url,
+      mark: org?.mark ? { src: org.mark, width: org.markWidth } : undefined,
+      monogram: initials(role.org),
+      positions: role.positions,
+      stack: role.stack ?? [],
+      caseStudy: project
+        ? { slug: project.slug, title: project.title }
+        : undefined,
+    };
+  });
+
   return (
     <section className="section" id="experience">
-      <div className="container experience">
-        <div className="experience-intro">
+      <div className="container">
+        <div className="experience-head">
           <h2 className="headline-md">
             Work
             <br />
             <span className="text-grey">experience</span>
           </h2>
-          <p className="mt-6 max-w-[30ch] text-lg leading-snug">
+          <p className="max-w-[34ch] text-lg leading-snug">
             Software engineering, research, and media production. The constant
             is delivery that remains correct after it ships.
           </p>
         </div>
-        <div>
-          {roles.map((role) => {
-            const org = orgByName(role.org);
-            const caseStudy = role.caseStudy
-              ? getProject(role.caseStudy)
-              : undefined;
-            const [only] = role.positions;
-            const promoted = role.positions.length > 1;
-            return (
-              <article key={role.org} className="role">
-                <span className="role-mark">
-                  <RoleMark name={role.org} org={org} />
-                </span>
-                <div>
-                  <div className="role-head">
-                    <div>
-                      <h3>{role.org}</h3>
-                      {promoted ? null : (
-                        <p className="role-title">{only.title}</p>
-                      )}
-                    </div>
-                    <p className="role-when">
-                      {promoted ? span(role.positions) : only.dates}
-                      <br />
-                      {role.location}
-                    </p>
-                  </div>
-                  {promoted ? (
-                    <ol className="role-positions">
-                      {role.positions.map((position) => (
-                        <li key={position.title} className="role-position">
-                          <p className="role-position-title">
-                            {position.title}
-                          </p>
-                          <p className="role-position-dates">
-                            {position.dates}
-                          </p>
-                          <Points points={position.points} />
-                        </li>
-                      ))}
-                    </ol>
-                  ) : (
-                    <Points points={only.points} />
-                  )}
-                  {role.stack ? (
-                    <div className="stack-list role-stack">
-                      {role.stack.map((item) => (
-                        <span key={item}>{item}</span>
-                      ))}
-                    </div>
-                  ) : null}
-                  {caseStudy ? (
-                    <Link
-                      href={`/work/${caseStudy.slug}`}
-                      className="role-case"
-                    >
-                      Read the {caseStudy.title} case study ↗
-                    </Link>
-                  ) : null}
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        <ExperienceList items={items} />
       </div>
     </section>
   );
